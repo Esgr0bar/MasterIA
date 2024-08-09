@@ -1,1 +1,19 @@
+site_name: AI-Based Audio Mixing and Mastering
+theme:
+  name: material
 
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import sys; sys.path.insert(0, 'src')
+
+nav:
+  - Home: index.md
+  - Usage: usage.md
+  - API:
+      - Data Processing: reference/data_processing.md
+      - Feature Extraction: reference/feature_extraction.md
+      - Model Training: reference/model_training.md
