@@ -3,7 +3,7 @@ Data processing utilities for audio files.
 
 This module provides functions to load and split audio files into segments.
 
-Author: Your Name
+Author: Esgr0bar
 """
 
 import librosa
