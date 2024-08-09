@@ -3,49 +3,6 @@
 This project aims to develop an AI that can perform automated audio mixing and mastering based on user-defined preferences or by analyzing reference tracks.
 
 ## Project Structure
-.
-├── data/
-│   ├── raw/
-│   │   ├── tracks/
-│   │   │   ├── song1/
-│   │   │   │   ├── vocals.wav
-│   │   │   │   ├── drums.wav
-│   │   │   │   ├── bass.wav
-│   │   │   │   └── mix.wav
-│   │   │   └── ...
-│   │   └── metadata/
-│   │       ├── song1_metadata.json
-│   │       └── ...
-│   ├── processed/
-│   │   ├── features/
-│   │   │   ├── song1_mfcc.npy
-│   │   │   ├── song1_spectrogram.npy
-│   │   │   └── ...
-│   │   └── models/
-│   │       ├── mix_model.h5
-│   │       ├── master_model.h5
-│   │       └── ...
-├── src/
-│   ├── data_processing.py
-│   ├── feature_extraction.py
-│   ├── model_training.py
-│   ├── inference.py
-│   └── ...
-├── tests/
-│   ├── test_data_processing.py
-│   ├── test_feature_extraction.py
-│   └── test_model_training.py
-├── notebooks/
-│   ├── EDA.ipynb
-│   └── Model_Training.ipynb
-├── .github/
-│   └── workflows/
-│       ├── ci.yml
-│       └── cd.yml
-├── README.md
-├── requirements.txt
-└── setup.py
-
 
 - `data/`: Contains all datasets and related metadata.
   - `raw/`: Raw audio data and metadata.
