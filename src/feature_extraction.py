@@ -1,42 +1,34 @@
-"""
-Feature extraction utilities for audio processing.
-
-This module provides functions to extract features such as MFCCs and spectrograms.
-
-Author: Esgr0bar
-"""
-
-import librosa
 import numpy as np
+import librosa
 
-def extract_mfcc(y, sr, n_mfcc=13):
-    """
-    Extract MFCC features from an audio signal.
+def extract_mfcc(audio_data, n_mfcc=13):
+    """Extract MFCC features from multiple audio tracks.
 
     Args:
-        y (numpy.ndarray): Audio time series.
-        sr (int): Sample rate of the audio.
+        audio_data (dict): Dictionary of audio data where keys are filenames.
         n_mfcc (int): Number of MFCCs to return.
 
     Returns:
-        numpy.ndarray: MFCC feature matrix.
+        dict: A dictionary with MFCC features.
     """
-    mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
-    return mfccs
+    mfcc_features = {}
+    for filename, audio in audio_data.items():
+        mfccs = librosa.feature.mfcc(y=audio, sr=librosa.get_samplerate(filename), n_mfcc=n_mfcc)
+        mfcc_features[filename] = mfccs
+    return mfcc_features
 
-def extract_spectrogram(y, sr, n_fft=2048, hop_length=512):
-    """
-    Extract spectrogram from an audio signal.
+def extract_spectrogram(audio_data):
+    """Extract spectrogram features from multiple audio tracks.
 
     Args:
-        y (numpy.ndarray): Audio time series.
-        sr (int): Sample rate of the audio.
-        n_fft (int): Number of samples per FFT.
-        hop_length (int): Number of samples between successive frames.
+        audio_data (dict): Dictionary of audio data where keys are filenames.
 
     Returns:
-        numpy.ndarray: Spectrogram matrix.
+        dict: A dictionary with spectrogram features.
     """
-    S = np.abs(librosa.stft(y, n_fft=n_fft, hop_length=hop_length))
-    return S
-
+    spectrograms = {}
+    for filename, audio in audio_data.items():
+        D = np.abs(librosa.stft(audio))**2
+        S = librosa.feature.melspectrogram(S=D, sr=librosa.get_samplerate(filename))
+        spectrograms[filename] = S
+    return spectrograms
