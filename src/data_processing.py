@@ -1,39 +1,41 @@
-"""
-Data processing utilities for audio files.
-
-This module provides functions to load and split audio files into segments.
-
-Author: Esgr0bar
-"""
-
+import os
+import numpy as np
 import librosa
 
-def load_audio(file_path, sr=44100):
-    """
-    Load an audio file.
+def load_audio_files(directory):
+    """Loads multiple audio files from a directory.
 
     Args:
-        file_path (str): Path to the audio file.
-        sr (int): Sample rate for loading audio.
+        directory (str): Path to the directory containing audio files.
 
     Returns:
-        tuple: Tuple containing the audio time series (numpy.ndarray) and sample rate (int).
+        dict: A dictionary where keys are filenames and values are numpy arrays of audio data.
     """
-    y, sr = librosa.load(file_path, sr=sr)
-    return y, sr
+    audio_data = {}
+    for filename in os.listdir(directory):
+        if filename.endswith('.wav'):
+            file_path = os.path.join(directory, filename)
+            audio, sr = librosa.load(file_path, sr=None)
+            audio_data[filename] = audio
+    return audio_data
 
-def split_tracks(file_path, segment_length=5):
-    """
-    Split an audio track into smaller segments.
+def split_tracks(audio_data, segment_length=5):
+    """Splits multiple audio tracks into segments.
 
     Args:
-        file_path (str): Path to the audio file.
+        audio_data (dict): Dictionary of audio data where keys are filenames.
         segment_length (int): Length of each segment in seconds.
 
     Returns:
-        list: A list of audio segments (numpy.ndarray).
+        dict: A dictionary with segmented audio data.
     """
-    y, sr = load_audio(file_path)
-    segments = [y[i:i + sr * segment_length] for i in range(0, len(y), sr * segment_length)]
-    return segments
-
+    segmented_data = {}
+    for filename, audio in audio_data.items():
+        segments = []
+        sr = librosa.get_samplerate(filename)
+        num_samples = sr * segment_length
+        for start in range(0, len(audio), num_samples):
+            segment = audio[start:start + num_samples]
+            segments.append(segment)
+        segmented_data[filename] = segments
+    return segmented_data
