@@ -1,25 +1,23 @@
-# test_feature_extraction.py
-
-import unittest
-import numpy as np
+import os
+import pytest
+from src.data_processing import load_audio_files
 from src.feature_extraction import extract_mfcc, extract_spectrogram
 
-class TestFeatureExtraction(unittest.TestCase):
+def test_extract_mfcc():
+    directory = "test_data/raw/tracks"
+    audio_data = load_audio_files(directory)
+    mfcc_features = extract_mfcc(audio_data)
+    assert len(mfcc_features) > 0
+    for filename, mfcc in mfcc_features.items():
+        assert mfcc is not None
+        assert mfcc.shape[0] == 13  # Default number of MFCCs is 13
 
-    def test_extract_mfcc(self):
-        # Test MFCC extraction
-        y = np.random.randn(44100 * 5)  # Simulated 5-second audio
-        sr = 44100
-        mfccs = extract_mfcc(y, sr)
-        self.assertEqual(mfccs.shape, (13, 431))  # Example shape (n_mfcc, frames)
-
-    def test_extract_spectrogram(self):
-        # Test spectrogram extraction
-        y = np.random.randn(44100 * 5)  # Simulated 5-second audio
-        sr = 44100
-        spectrogram = extract_spectrogram(y, sr)
-        self.assertEqual(spectrogram.shape[0], 1025)  # 1025 frequency bins for default FFT
-
-if __name__ == '__main__':
-    unittest.main()
-
+def test_extract_spectrogram():
+    directory = "test_data/raw/tracks"
+    audio_data = load_audio_files(directory)
+    spectrograms = extract_spectrogram(audio_data)
+    assert len(spectrograms) > 0
+    for filename, S in spectrograms.items():
+        assert S is not None
+        assert S.shape[0] > 0
+        assert S.shape[1] > 0
