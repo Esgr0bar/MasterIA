@@ -1,6 +1,29 @@
 import os
 import numpy as np
 import librosa
+import json
+
+def load_audio_files_with_metadata(directory):
+    """Loads multiple audio files along with their metadata.
+
+    Args:
+        directory (str): Path to the directory containing audio files and metadata.
+
+    Returns:
+        dict: A dictionary where keys are filenames and values are tuples (audio data, metadata).
+    """
+    audio_data = {}
+    for filename in os.listdir(directory):
+        if filename.endswith('.wav'):
+            file_path = os.path.join(directory, filename)
+            audio, sr = librosa.load(file_path, sr=None)
+            metadata_file = filename.replace('.wav', '.json')
+            metadata_path = os.path.join(directory, metadata_file)
+            if os.path.exists(metadata_path):
+                with open(metadata_path, 'r') as f:
+                    metadata = json.load(f)
+                audio_data[filename] = (audio, metadata)
+    return audio_data
 
 def load_audio_files(directory):
     """Loads multiple audio files from a directory.
