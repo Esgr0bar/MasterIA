@@ -1,3 +1,5 @@
+import json
+
 def collect_user_feedback(suggested_actions, suggested_cuts):
     """Collect user feedback on the suggested actions and cuts.
 
@@ -41,3 +43,18 @@ def collect_user_feedback(suggested_actions, suggested_cuts):
                 })
 
     return feedback
+
+def save_feedback(feedback, filename="feedback.json"):
+    """Saves user feedback to a JSON file.
+
+    Args:
+        feedback (list): List of feedback entries.
+        filename (str): The name of the file where feedback will be saved.
+    """
+    try:
+        with open(filename, 'a') as f:
+            for entry in feedback:
+                f.write(json.dumps(entry) + "\n")
+        print(f"Feedback saved to {filename}")
+    except Exception as e:
+        print(f"Error saving feedback: {e}")
