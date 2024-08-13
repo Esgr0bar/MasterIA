@@ -1,6 +1,28 @@
 import numpy as np
 import librosa
 
+def extract_basic_features(audio_data):
+    """Extracts basic audio features (e.g., spectral, loudness) from the audio tracks.
+
+    Args:
+        audio_data (dict): Dictionary of audio data.
+
+    Returns:
+        dict: Dictionary of extracted features.
+    """
+    features = {}
+    for filename, (audio, _) in audio_data.items():
+        sr = librosa.get_samplerate(filename)
+        spectral_centroid = librosa.feature.spectral_centroid(y=audio, sr=sr)
+        rmse = librosa.feature.rms(y=audio)
+        loudness = np.mean(librosa.feature.spectral_bandwidth(y=audio, sr=sr))
+        features[filename] = {
+            "spectral_centroid": np.mean(spectral_centroid),
+            "rmse": np.mean(rmse),
+            "loudness": loudness
+        }
+    return features
+
 def extract_mfcc(audio_data, n_mfcc=13):
     """Extract MFCC features from multiple audio tracks.
 
