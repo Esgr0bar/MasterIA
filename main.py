@@ -2,7 +2,7 @@ import os
 from src.data_processing import load_audio_files_with_metadata
 from src.feature_extraction import extract_basic_features
 from src.model_training import prepare_data_for_training, train_model
-from src.action_suggestion import suggest_actions, print_suggested_actions
+from src.action_suggestion import suggest_actions, print_suggested_actions, suggest_cuts
 
 def main():
     # Step 1: Load the data
@@ -20,10 +20,13 @@ def main():
     new_data_directory = "data/new_audio/"
     new_audio_data, _ = load_audio_files_with_metadata(new_data_directory)
     new_features = extract_basic_features(new_audio_data)
+    
+    # Suggest effects and cuts
     suggested_actions = suggest_actions(model, new_features)
+    suggested_cuts = suggest_cuts(model, new_features)
 
-    # Print the suggested actions
-    print_suggested_actions(suggested_actions)
+    # Print the suggested actions and cuts
+    print_suggested_actions(suggested_actions, suggested_cuts)
 
 if __name__ == "__main__":
     main()
