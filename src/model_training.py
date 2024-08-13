@@ -2,6 +2,37 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 
+def prepare_data_for_training(features, audio_data):
+    """Prepares data for training by associating features with metadata labels.
+
+    Args:
+        features (dict): Extracted features for each file.
+        audio_data (dict): Audio data with corresponding metadata.
+
+    Returns:
+        X, y: Features matrix and label array for training.
+    """
+    X = []
+    y = []
+    for filename in features.keys():
+        X.append(list(features[filename].values()))
+        y.append(audio_data[filename][1]["effects"])  # Assume effects metadata is a list of actions
+    return np.array(X), y
+
+def train_action_prediction_model(X, y):
+    """Trains a model to predict actions based on features.
+
+    Args:
+        X (array): Feature matrix.
+        y (array): Label array.
+
+    Returns:
+        model: Trained classifier model.
+    """
+    model = RandomForestClassifier(n_estimators=100)
+    model.fit(X, y)
+    return model
+
 def train_model(feature_data, labels):
     """Trains a model on multiple audio tracks.
 
