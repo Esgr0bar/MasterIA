@@ -2,11 +2,12 @@ import os
 from src.data_processing import load_audio_files_with_metadata
 from src.feature_extraction import extract_basic_features
 from src.model_training import prepare_data_for_training, train_model, incorporate_feedback_into_training
-from src.action_suggestion import suggest_actions, print_suggested_actions, suggest_cuts
+from src.action_suggestion import print_suggested_actions
 from src.feedback import collect_user_feedback, save_feedback
+from inference import run_inference, load_model
 
 def main():
-    # Step 1: Load the data
+    # Step 1: Load the data for initial training
     data_directory = "data/audio_with_metadata/"
     audio_data, metadata = load_audio_files_with_metadata(data_directory)
 
@@ -17,13 +18,19 @@ def main():
     X, y = prepare_data_for_training(features, metadata)
     model = train_model(X, y)  # Initial training
     
-    # Step 4: Use the model to suggest actions on new audio data
+    # Save the model for later inference
+    model_path = "models/trained_model.pkl"
+    model.save_model(model_path)
+
+    # Step 4: Use the model to suggest actions on new audio data through inference
     new_data_directory = "data/new_audio/"
     new_audio_data, _ = load_audio_files_with_metadata(new_data_directory)
-    new_features = extract_basic_features(new_audio_data)
+
+    # Load the model for inference
+    inference_model = load_model(model_path)
     
-    suggested_actions = suggest_actions(model, new_features)
-    suggested_cuts = suggest_cuts(model, new_features)
+    # Run inference to get suggested actions and cuts
+    suggested_actions, suggested_cuts = run_inference(model_path, new_audio_data)
 
     # Print the suggested actions and cuts
     print_suggested_actions(suggested_actions, suggested_cuts)
@@ -34,7 +41,7 @@ def main():
 
     # Step 6: Retrain the model using the feedback
     model = incorporate_feedback_into_training(features, metadata)
-    
+    model.save_model(model_path)
+
 if __name__ == "__main__":
     main()
-
