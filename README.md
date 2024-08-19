@@ -42,6 +42,7 @@ data may be stored locally due to large size of files
     - `drums.wav`: Isolated drums track.
     - `bass.wav`: Isolated bass track.
     - `mix.wav`: The final mixed track.
+    - etc...
 
 ### 2. Metadata
 
@@ -55,7 +56,8 @@ data may be stored locally due to large size of files
   {
     "vocals": {
       "eq": {"low_cut": 100, "high_cut": 10000},
-      "compression": {"threshold": -20, "ratio": 4}
+      "compression": {"threshold": -20, "ratio": 4},
+      etc
     },
     "drums": {
       "eq": {"low_cut": 50, "high_cut": 15000},
