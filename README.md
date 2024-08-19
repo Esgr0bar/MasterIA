@@ -3,7 +3,7 @@
 This project aims to develop an AI that can perform automated audio mixing and mastering based on user-defined preferences or by analyzing reference tracks.
 
 ## Project Structure
-
+data may be stored locally due to large size of files
 - `data/`: Contains all datasets and related metadata.
   - `raw/`: Raw audio data and metadata.
     - `tracks/`: Subdirectory for individual songs, each containing separate tracks (e.g., vocals, drums) and the final mix.
