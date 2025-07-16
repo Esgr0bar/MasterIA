@@ -1,3 +1,3 @@
 # Feature Extraction
 
-::: src.feature_extraction
+::: feature_extraction

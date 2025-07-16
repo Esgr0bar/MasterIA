@@ -1,3 +1,3 @@
 # Inference
 
-::: src.inference
+::: inference

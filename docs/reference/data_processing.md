@@ -1,3 +1,3 @@
 # Data Processing
 
-::: src.data_processing
+::: data_processing

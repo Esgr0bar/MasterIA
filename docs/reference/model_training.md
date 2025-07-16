@@ -1,3 +1,3 @@
 # Model Training
 
-::: src.model_training
+::: model_training
