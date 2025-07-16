@@ -13,12 +13,15 @@ plugins:
 nav:
   - Home: index.md
   - Project Overview: index.md
+  - Usage Guide: usage.md
   - Data Handling: data.md
   - Notebooks: notebooks.md
+  - Inference: inference.md
   - API Reference:
       - Data Processing: reference/data_processing.md
       - Feature Extraction: reference/feature_extraction.md
       - Model Training: reference/model_training.md
+      - Inference: reference/inference.md
   - Contribution Guidelines: contributing.md
   - Continuous Integration: ci_cd.md
   - Changelog: changelog.md
