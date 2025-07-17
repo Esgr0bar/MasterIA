@@ -1,0 +1,2815 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../malware-analysis/">
+      
+      
+        <link rel="next" href="../tools-techniques/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Specific Artifacts - AI-Based Audio Mixing and Mastering</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#artefacts-specifiques-windows-pour-dfir" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="AI-Based Audio Mixing and Mastering" class="md-header__button md-logo" aria-label="AI-Based Audio Mixing and Mastering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI-Based Audio Mixing and Mastering
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Specific Artifacts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../usage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Usage Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../data/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Data Handling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../notebooks/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Notebooks
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../inference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api_reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../windows-fundamentals/" class="md-tabs__link">
+          
+  
+  
+  Windows DFIR
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ci_cd/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CI/CD
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AI-Based Audio Mixing and Mastering" class="md-nav__button md-logo" aria-label="AI-Based Audio Mixing and Mastering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI-Based Audio Mixing and Mastering
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Handling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notebooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Windows DFIR
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Windows DFIR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acquisition-preservation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Acquisition & Preservation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../malware-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Malware Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Specific Artifacts
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specific Artifacts
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#windows-event-tracing-etw-traces-avancees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows Event Tracing (ETW) - Traces avancées
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows Event Tracing (ETW) - Traces avancées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-detw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble d'ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble d&#39;ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-etw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture ETW
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-detw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration d'ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration d&#39;ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#outils-de-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils de configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-avancee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration avancée
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-traces-etw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des traces ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des traces ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parsing-des-fichiers-etl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parsing des fichiers ETL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-evenements-specifiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des événements spécifiques
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-autres-artefacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec autres artefacts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Corrélation avec autres artefacts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-event-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec Event Logs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-sysmon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec Sysmon
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outils-danalyse-etw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils d'analyse ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outils d&#39;analyse ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wpa-windows-performance-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      WPA (Windows Performance Analyzer)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krabsetw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Krabsetw
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-performance-toolkit-analyse-des-performances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows Performance Toolkit - Analyse des performances
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows Performance Toolkit - Analyse des performances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-de-wpt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble de WPT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble de WPT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#composants-principaux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composants principaux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation-de-wpt-pour-la-forensique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilisation de WPT pour la forensique
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Utilisation de WPT pour la forensique">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capture-devenements-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture d'événements système
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-traces-de-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des traces de performance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-les-incidents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec les incidents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Corrélation avec les incidents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#timeline-des-evenements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeline des événements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-anomalies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des anomalies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimisation-des-analyses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimisation des analyses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optimisation des analyses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtrage-des-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtrage des données
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#powershell-forensics-analyse-des-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      PowerShell Forensics - Analyse des scripts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PowerShell Forensics - Analyse des scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-de-powershell-forensics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble de PowerShell Forensics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble de PowerShell Forensics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sources-dartefacts-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources d'artefacts PowerShell
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs PowerShell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logs PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-du-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration du logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des logs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-scripts-malveillants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des scripts malveillants
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des scripts malveillants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detection-de-patterns-malveillants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection de patterns malveillants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deobfuscation-de-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Déobfuscation de scripts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#techniques-devasion-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Techniques d'évasion PowerShell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Techniques d&#39;évasion PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obfuscation-courante" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obfuscation courante
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-devasion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection d'évasion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outils-danalyse-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils d'analyse PowerShell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outils d&#39;analyse PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell-empire-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      PowerShell Empire Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#revoke-obfuscation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Revoke-Obfuscation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools-techniques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools & Techniques
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use Cases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci_cd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI/CD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#windows-event-tracing-etw-traces-avancees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows Event Tracing (ETW) - Traces avancées
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows Event Tracing (ETW) - Traces avancées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-detw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble d'ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble d&#39;ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-etw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture ETW
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-detw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration d'ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration d&#39;ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#outils-de-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils de configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-avancee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration avancée
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-traces-etw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des traces ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des traces ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parsing-des-fichiers-etl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parsing des fichiers ETL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-evenements-specifiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des événements spécifiques
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-autres-artefacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec autres artefacts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Corrélation avec autres artefacts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-event-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec Event Logs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-sysmon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec Sysmon
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outils-danalyse-etw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils d'analyse ETW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outils d&#39;analyse ETW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wpa-windows-performance-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      WPA (Windows Performance Analyzer)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krabsetw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Krabsetw
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-performance-toolkit-analyse-des-performances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows Performance Toolkit - Analyse des performances
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows Performance Toolkit - Analyse des performances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-de-wpt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble de WPT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble de WPT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#composants-principaux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composants principaux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation-de-wpt-pour-la-forensique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilisation de WPT pour la forensique
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Utilisation de WPT pour la forensique">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capture-devenements-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture d'événements système
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-traces-de-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des traces de performance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-avec-les-incidents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrélation avec les incidents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Corrélation avec les incidents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#timeline-des-evenements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeline des événements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-anomalies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des anomalies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimisation-des-analyses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimisation des analyses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optimisation des analyses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtrage-des-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtrage des données
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#powershell-forensics-analyse-des-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      PowerShell Forensics - Analyse des scripts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PowerShell Forensics - Analyse des scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-de-powershell-forensics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble de PowerShell Forensics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble de PowerShell Forensics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sources-dartefacts-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources d'artefacts PowerShell
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs PowerShell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logs PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-du-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration du logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des logs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-scripts-malveillants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des scripts malveillants
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des scripts malveillants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detection-de-patterns-malveillants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection de patterns malveillants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deobfuscation-de-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Déobfuscation de scripts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#techniques-devasion-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Techniques d'évasion PowerShell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Techniques d&#39;évasion PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obfuscation-courante" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obfuscation courante
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-devasion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection d'évasion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outils-danalyse-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils d'analyse PowerShell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outils d&#39;analyse PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell-empire-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      PowerShell Empire Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#revoke-obfuscation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Revoke-Obfuscation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="artefacts-specifiques-windows-pour-dfir">Artefacts Spécifiques Windows pour DFIR<a class="headerlink" href="#artefacts-specifiques-windows-pour-dfir" title="Permanent link">&para;</a></h1>
+<h2 id="windows-event-tracing-etw-traces-avancees">Windows Event Tracing (ETW) - Traces avancées<a class="headerlink" href="#windows-event-tracing-etw-traces-avancees" title="Permanent link">&para;</a></h2>
+<h3 id="vue-densemble-detw">Vue d'ensemble d'ETW<a class="headerlink" href="#vue-densemble-detw" title="Permanent link">&para;</a></h3>
+<p>Windows Event Tracing (ETW) est un mécanisme de trace haute performance intégré à Windows qui permet de capturer et d'analyser les événements système et d'applications en temps réel.</p>
+<h4 id="architecture-etw">Architecture ETW<a class="headerlink" href="#architecture-etw" title="Permanent link">&para;</a></h4>
+<p><strong>Composants principaux</strong>
+- <strong>Providers</strong> : Générateurs d'événements
+- <strong>Controllers</strong> : Gestionnaires de sessions de trace
+- <strong>Consumers</strong> : Consommateurs d'événements</p>
+<p><strong>Types de providers</strong>
+- <strong>Manifest-based</strong> : Définis par des fichiers manifestes
+- <strong>MOF-based</strong> : Ancienne méthode (deprecated)
+- <strong>TraceLogging</strong> : API moderne pour développeurs</p>
+<h3 id="configuration-detw">Configuration d'ETW<a class="headerlink" href="#configuration-detw" title="Permanent link">&para;</a></h3>
+<h4 id="outils-de-configuration">Outils de configuration<a class="headerlink" href="#outils-de-configuration" title="Permanent link">&para;</a></h4>
+<p><strong>WPA (Windows Performance Analyzer)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Lancement de WPA
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>wpa.exe
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># Ouverture d&#39;un fichier ETL
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>wpa.exe -i trace.etl
+</code></pre></div></p>
+<p><strong>WPR (Windows Performance Recorder)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># Profils disponibles
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>wpr -profiles
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a># Démarrage d&#39;une trace
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>wpr -start CPU -start DiskIO
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a># Arrêt et sauvegarde
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>wpr -stop trace.etl
+</code></pre></div></p>
+<p><strong>Logman</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># Créer une session de trace
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>logman create trace MyTrace -p Microsoft-Windows-Kernel-Process -o trace.etl
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a># Démarrer la trace
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>logman start MyTrace
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a># Arrêter la trace
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>logman stop MyTrace
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a># Supprimer la session
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>logman delete MyTrace
+</code></pre></div></p>
+<h4 id="configuration-avancee">Configuration avancée<a class="headerlink" href="#configuration-avancee" title="Permanent link">&para;</a></h4>
+<p><strong>Profils WPR personnalisés</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">&lt;WindowsPerformanceRecorder</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&lt;Profiles&gt;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&lt;SystemCollector</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;SystemCollector_Custom&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Custom System Collector&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">&lt;BufferSize</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;1024&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">&lt;Buffers</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;80&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">&lt;/SystemCollector&gt;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">&lt;EventCollector</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;EventCollector_Custom&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Custom Event Collector&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="nt">&lt;BufferSize</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;1024&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">      </span><span class="nt">&lt;Buffers</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;80&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nt">&lt;/EventCollector&gt;</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">&lt;SystemProvider</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;SystemProvider_Custom&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="nt">&lt;Keywords&gt;</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;ProcessThread&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;DiskIO&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;NetworkTrace&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">      </span><span class="nt">&lt;/Keywords&gt;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="nt">&lt;/SystemProvider&gt;</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="nt">&lt;EventProvider</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">      </span><span class="nt">&lt;Keywords&gt;</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;0x10&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">      </span><span class="nt">&lt;/Keywords&gt;</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="nt">&lt;/EventProvider&gt;</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="nt">&lt;Profile</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;Custom.Verbose.File&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Custom&quot;</span><span class="w"> </span><span class="na">Description=</span><span class="s">&quot;Custom profiling&quot;</span><span class="w"> </span><span class="na">LoggingMode=</span><span class="s">&quot;File&quot;</span><span class="w"> </span><span class="na">DetailLevel=</span><span class="s">&quot;Verbose&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">      </span><span class="nt">&lt;Collectors&gt;</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">        </span><span class="nt">&lt;SystemCollectorId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;SystemCollector_Custom&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">          </span><span class="nt">&lt;SystemProviderId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;SystemProvider_Custom&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">        </span><span class="nt">&lt;/SystemCollectorId&gt;</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="nt">&lt;EventCollectorId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;EventCollector_Custom&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">          </span><span class="nt">&lt;EventProviderId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">        </span><span class="nt">&lt;/EventCollectorId&gt;</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">      </span><span class="nt">&lt;/Collectors&gt;</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">    </span><span class="nt">&lt;/Profile&gt;</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">  </span><span class="nt">&lt;/Profiles&gt;</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="nt">&lt;/WindowsPerformanceRecorder&gt;</span>
+</code></pre></div></p>
+<h3 id="analyse-des-traces-etw">Analyse des traces ETW<a class="headerlink" href="#analyse-des-traces-etw" title="Permanent link">&para;</a></h3>
+<h4 id="parsing-des-fichiers-etl">Parsing des fichiers ETL<a class="headerlink" href="#parsing-des-fichiers-etl" title="Permanent link">&para;</a></h4>
+<p><strong>PowerShell avec Get-WinEvent</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c"># Lecture d&#39;un fichier ETL</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="s2">&quot;C:\traces\trace.etl&quot;</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">TimeCreated</span><span class="p">,</span> <span class="n">Id</span><span class="p">,</span> <span class="n">LevelDisplayName</span><span class="p">,</span> <span class="n">Message</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c"># Filtrage par provider</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="s2">&quot;C:\traces\trace.etl&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">ProviderName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c"># Filtrage par Event ID</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="s2">&quot;C:\traces\trace.etl&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">Id</span><span class="p">=</span><span class="n">1</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="nv">$processName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ImageFileName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="nv">$processId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="nv">$parentId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ParentProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Process: $processName (PID: $processId, PPID: $parentId)&quot;</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Python avec python-etw</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span> <span class="nn">etw</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">def</span> <span class="nf">process_event</span><span class="p">(</span><span class="n">event_record</span><span class="p">):</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Process ETW event&quot;&quot;&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">if</span> <span class="n">event_record</span><span class="o">.</span><span class="n">EventHeader</span><span class="o">.</span><span class="n">ProviderId</span> <span class="o">==</span> <span class="s2">&quot;{22fb2cd6-0e7b-422b-a0c7-2fad1fd0e716}&quot;</span><span class="p">:</span>  <span class="c1"># Kernel-Process</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">event_data</span> <span class="o">=</span> <span class="n">event_record</span><span class="o">.</span><span class="n">EventData</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Process Event: </span><span class="si">{</span><span class="n">event_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># Créer un consumer ETW</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">consumer</span> <span class="o">=</span> <span class="n">etw</span><span class="o">.</span><span class="n">ETWConsumer</span><span class="p">()</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">consumer</span><span class="o">.</span><span class="n">start_trace</span><span class="p">(</span><span class="s2">&quot;MyTrace&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="n">consumer</span><span class="o">.</span><span class="n">register_callback</span><span class="p">(</span><span class="n">process_event</span><span class="p">)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="n">consumer</span><span class="o">.</span><span class="n">process_events</span><span class="p">()</span>
+</code></pre></div></p>
+<h4 id="analyse-des-evenements-specifiques">Analyse des événements spécifiques<a class="headerlink" href="#analyse-des-evenements-specifiques" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse des processus</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># Événements de création de processus (Event ID 1)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="s2">&quot;trace.etl&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">ProviderName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="p">;</span> <span class="n">Id</span><span class="p">=</span><span class="n">1</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="nv">$processName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ImageFileName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="nv">$processId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="nv">$parentId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ParentProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="nv">$commandLine</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;CommandLine&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="n">TimeCreated</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="n">ProcessName</span> <span class="p">=</span> <span class="nv">$processName</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="n">ProcessId</span> <span class="p">=</span> <span class="nv">$processId</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        <span class="n">ParentProcessId</span> <span class="p">=</span> <span class="nv">$parentId</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="n">CommandLine</span> <span class="p">=</span> <span class="nv">$commandLine</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="p">}</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Analyse des accès fichiers</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c"># Événements d&#39;accès fichier</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="s2">&quot;trace.etl&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">ProviderName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-Kernel-File&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="nv">$fileName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;FileName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="nv">$processId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="nv">$operation</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;Operation&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="n">TimeCreated</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="n">FileName</span> <span class="p">=</span> <span class="nv">$fileName</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="n">ProcessId</span> <span class="p">=</span> <span class="nv">$processId</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="n">Operation</span> <span class="p">=</span> <span class="nv">$operation</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    <span class="p">}</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="correlation-avec-autres-artefacts">Corrélation avec autres artefacts<a class="headerlink" href="#correlation-avec-autres-artefacts" title="Permanent link">&para;</a></h3>
+<h4 id="correlation-avec-event-logs">Corrélation avec Event Logs<a class="headerlink" href="#correlation-avec-event-logs" title="Permanent link">&para;</a></h4>
+<p><strong>Corrélation ProcessId</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c"># Récupérer les processus depuis ETW</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">$etwProcesses</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="s2">&quot;trace.etl&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">ProviderName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="p">;</span> <span class="n">Id</span><span class="p">=</span><span class="n">1</span><span class="p">}</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c"># Récupérer les événements de sécurité</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nv">$securityEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-LogName</span> <span class="s2">&quot;Security&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">Id</span><span class="p">=</span><span class="n">4688</span><span class="p">}</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c"># Corréler par ProcessId et timestamp</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">foreach</span> <span class="p">(</span><span class="nv">$etwProcess</span> <span class="k">in</span> <span class="nv">$etwProcesses</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="nv">$etwEvent</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$etwProcess</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="nv">$etwProcessId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$etwEvent</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="nv">$etwTime</span> <span class="p">=</span> <span class="nv">$etwProcess</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="nv">$correlatedEvents</span> <span class="p">=</span> <span class="nv">$securityEvents</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="nv">$secEvent</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        <span class="nv">$secProcessId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$secEvent</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;NewProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="nv">$secTime</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="k">return</span> <span class="nv">$secProcessId</span> <span class="o">-eq</span> <span class="nv">$etwProcessId</span> <span class="o">-and</span> <span class="p">((</span><span class="nv">$secTime</span> <span class="p">-</span> <span class="nv">$etwTime</span><span class="p">).</span><span class="n">TotalSeconds</span> <span class="o">-lt</span> <span class="n">5</span><span class="p">)</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>    <span class="p">}</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$correlatedEvents</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>        <span class="nb">Write-Host</span> <span class="s2">&quot;Correlated process $etwProcessId at $etwTime&quot;</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>    <span class="p">}</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="correlation-avec-sysmon">Corrélation avec Sysmon<a class="headerlink" href="#correlation-avec-sysmon" title="Permanent link">&para;</a></h4>
+<p><strong>Corrélation multi-sources</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">function</span> <span class="n">Correlate-Events</span> <span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="k">param</span><span class="p">(</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        <span class="no">[string]</span><span class="nv">$ETWFile</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="no">[datetime]</span><span class="nv">$StartTime</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="no">[datetime]</span><span class="nv">$EndTime</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="p">)</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="c"># ETW Events</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="nv">$etwEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="nv">$ETWFile</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        <span class="n">ProviderName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-Kernel-Process&quot;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        <span class="n">StartTime</span><span class="p">=</span><span class="nv">$StartTime</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>        <span class="n">EndTime</span><span class="p">=</span><span class="nv">$EndTime</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="p">}</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="c"># Sysmon Events</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="nv">$sysmonEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-LogName</span> <span class="s2">&quot;Microsoft-Windows-Sysmon/Operational&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        <span class="n">StartTime</span><span class="p">=</span><span class="nv">$StartTime</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        <span class="n">EndTime</span><span class="p">=</span><span class="nv">$EndTime</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>    <span class="p">}</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>    <span class="c"># Security Events</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>    <span class="nv">$securityEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-LogName</span> <span class="s2">&quot;Security&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>        <span class="n">StartTime</span><span class="p">=</span><span class="nv">$StartTime</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        <span class="n">EndTime</span><span class="p">=</span><span class="nv">$EndTime</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>    <span class="p">}</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>    <span class="nv">$correlatedEvents</span> <span class="p">=</span> <span class="p">@()</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$etwEvent</span> <span class="k">in</span> <span class="nv">$etwEvents</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>        <span class="nv">$etwXml</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$etwEvent</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>        <span class="nv">$etwProcessId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$etwXml</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>        <span class="nv">$etwTime</span> <span class="p">=</span> <span class="nv">$etwEvent</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>        <span class="c"># Trouver les événements Sysmon correspondants</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>        <span class="nv">$matchingSysmon</span> <span class="p">=</span> <span class="nv">$sysmonEvents</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>            <span class="nv">$sysmonXml</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>            <span class="nv">$sysmonProcessId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$sysmonXml</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ProcessId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>            <span class="nv">$sysmonTime</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>            <span class="k">return</span> <span class="nv">$sysmonProcessId</span> <span class="o">-eq</span> <span class="nv">$etwProcessId</span> <span class="o">-and</span> <span class="p">((</span><span class="nv">$sysmonTime</span> <span class="p">-</span> <span class="nv">$etwTime</span><span class="p">).</span><span class="n">TotalSeconds</span> <span class="o">-lt</span> <span class="n">2</span><span class="p">)</span>
+<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>        <span class="p">}</span>
+<a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>
+<a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$matchingSysmon</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>            <span class="nv">$correlatedEvents</span> <span class="p">+=</span> <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>                <span class="n">ETWEvent</span> <span class="p">=</span> <span class="nv">$etwEvent</span>
+<a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>                <span class="n">SysmonEvents</span> <span class="p">=</span> <span class="nv">$matchingSysmon</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>                <span class="n">ProcessId</span> <span class="p">=</span> <span class="nv">$etwProcessId</span>
+<a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>                <span class="n">TimeCreated</span> <span class="p">=</span> <span class="nv">$etwTime</span>
+<a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>            <span class="p">}</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>        <span class="p">}</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>    <span class="p">}</span>
+<a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a>
+<a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>    <span class="k">return</span> <span class="nv">$correlatedEvents</span>
+<a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="outils-danalyse-etw">Outils d'analyse ETW<a class="headerlink" href="#outils-danalyse-etw" title="Permanent link">&para;</a></h3>
+<h4 id="wpa-windows-performance-analyzer">WPA (Windows Performance Analyzer)<a class="headerlink" href="#wpa-windows-performance-analyzer" title="Permanent link">&para;</a></h4>
+<p><strong>Configuration des vues</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cm">&lt;!-- Custom WPA Profile --&gt;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">&lt;WpaProfile&gt;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">&lt;TraceMergeProperties&gt;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">&lt;TraceMergeProperty</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Process Events&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="nt">&lt;/TraceMergeProperties&gt;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="nt">&lt;Views&gt;</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="nt">&lt;View</span><span class="w"> </span><span class="na">Title=</span><span class="s">&quot;Process Timeline&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;Timeline&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">      </span><span class="nt">&lt;Graphs&gt;</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="nt">&lt;Graph</span><span class="w"> </span><span class="na">Title=</span><span class="s">&quot;Process Creation&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;Line&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">          </span><span class="nt">&lt;Data&gt;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">            </span><span class="nt">&lt;Series</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;ProcessId&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;Numeric&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">            </span><span class="nt">&lt;Series</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;ProcessName&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;String&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">          </span><span class="nt">&lt;/Data&gt;</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">        </span><span class="nt">&lt;/Graph&gt;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">      </span><span class="nt">&lt;/Graphs&gt;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">    </span><span class="nt">&lt;/View&gt;</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">  </span><span class="nt">&lt;/Views&gt;</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="nt">&lt;/WpaProfile&gt;</span>
+</code></pre></div></p>
+<h4 id="krabsetw">Krabsetw<a class="headerlink" href="#krabsetw" title="Permanent link">&para;</a></h4>
+<p><strong>Utilisation de Krabsetw (C++)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;krabs.hpp&gt;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">analyze_etw_trace</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">etl_file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">krabs</span><span class="o">::</span><span class="n">etl_file_reader</span><span class="w"> </span><span class="n">reader</span><span class="p">(</span><span class="n">etl_file</span><span class="p">);</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="c1">// Provider pour processus</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="n">krabs</span><span class="o">::</span><span class="n">provider</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">kernel_process_provider</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="p">);</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="c1">// Callback pour événements de processus</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="n">kernel_process_provider</span><span class="p">.</span><span class="n">on_event</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">krabs</span><span class="o">::</span><span class="n">event_record</span><span class="o">&amp;</span><span class="w"> </span><span class="n">record</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">        </span><span class="n">krabs</span><span class="o">::</span><span class="n">schema</span><span class="w"> </span><span class="n">schema</span><span class="p">(</span><span class="n">record</span><span class="p">);</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">schema</span><span class="p">.</span><span class="n">event_id</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Process creation</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">process_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">process_id</span><span class="p">();</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">image_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">get_unicode_string</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;ImageFileName&quot;</span><span class="p">);</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">command_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">get_unicode_string</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;CommandLine&quot;</span><span class="p">);</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;Process created: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">image_name</span><span class="w"> </span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot; (PID: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">process_id</span><span class="w"> </span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;, CMD: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">command_line</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;)&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">    </span><span class="p">});</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">    </span><span class="n">reader</span><span class="p">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">kernel_process_provider</span><span class="p">);</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">    </span><span class="n">reader</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="p">}</span>
+</code></pre></div></p>
+<h2 id="windows-performance-toolkit-analyse-des-performances">Windows Performance Toolkit - Analyse des performances<a class="headerlink" href="#windows-performance-toolkit-analyse-des-performances" title="Permanent link">&para;</a></h2>
+<h3 id="vue-densemble-de-wpt">Vue d'ensemble de WPT<a class="headerlink" href="#vue-densemble-de-wpt" title="Permanent link">&para;</a></h3>
+<p>Le Windows Performance Toolkit (WPT) est une collection d'outils de Microsoft pour l'analyse des performances système, utile en forensique pour comprendre les comportements système.</p>
+<h4 id="composants-principaux">Composants principaux<a class="headerlink" href="#composants-principaux" title="Permanent link">&para;</a></h4>
+<p><strong>WPR (Windows Performance Recorder)</strong>
+- Capture de traces système
+- Profils prédéfinis
+- Configuration personnalisée</p>
+<p><strong>WPA (Windows Performance Analyzer)</strong>
+- Analyse des traces
+- Visualisation des données
+- Corrélation d'événements</p>
+<p><strong>Xperf (ligne de commande)</strong>
+- Interface legacy
+- Scripting avancé
+- Automatisation</p>
+<h3 id="utilisation-de-wpt-pour-la-forensique">Utilisation de WPT pour la forensique<a class="headerlink" href="#utilisation-de-wpt-pour-la-forensique" title="Permanent link">&para;</a></h3>
+<h4 id="capture-devenements-systeme">Capture d'événements système<a class="headerlink" href="#capture-devenements-systeme" title="Permanent link">&para;</a></h4>
+<p><strong>Profil de capture généraliste</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># Démarrer la capture
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>wpr -start GeneralProfile -start CPU -start DiskIO -start Registry
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a># Activité suspecte...
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a># Arrêter et sauvegarder
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>wpr -stop forensic_trace.etl
+</code></pre></div></p>
+<p><strong>Profil personnalisé pour forensique</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">&lt;WindowsPerformanceRecorder</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">&lt;Profiles&gt;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">&lt;SystemCollector</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;ForensicSystemCollector&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Forensic System Collector&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">      </span><span class="nt">&lt;BufferSize</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;1024&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">      </span><span class="nt">&lt;Buffers</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;128&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nt">&lt;/SystemCollector&gt;</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="nt">&lt;EventCollector</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;ForensicEventCollector&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Forensic Event Collector&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">      </span><span class="nt">&lt;BufferSize</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;1024&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">      </span><span class="nt">&lt;Buffers</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;128&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span><span class="nt">&lt;/EventCollector&gt;</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">    </span><span class="nt">&lt;SystemProvider</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;ForensicSystemProvider&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">      </span><span class="nt">&lt;Keywords&gt;</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;ProcessThread&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;Loader&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;DiskIO&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;HardFaults&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;VirtualAlloc&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;NetworkTrace&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;Registry&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="w">      </span><span class="nt">&lt;/Keywords&gt;</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="w">    </span><span class="nt">&lt;/SystemProvider&gt;</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">    </span><span class="nt">&lt;EventProvider</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="w">      </span><span class="nt">&lt;Keywords&gt;</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;0xFFFFFFFFFFFFFFF&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="w">      </span><span class="nt">&lt;/Keywords&gt;</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="w">    </span><span class="nt">&lt;/EventProvider&gt;</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="w">    </span><span class="nt">&lt;EventProvider</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;Microsoft-Windows-Security-Auditing&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Microsoft-Windows-Security-Auditing&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a><span class="w">      </span><span class="nt">&lt;Keywords&gt;</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a><span class="w">        </span><span class="nt">&lt;Keyword</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;0xFFFFFFFFFFFFFFF&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a><span class="w">      </span><span class="nt">&lt;/Keywords&gt;</span>
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a><span class="w">    </span><span class="nt">&lt;/EventProvider&gt;</span>
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a><span class="w">    </span><span class="nt">&lt;Profile</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;Forensic.Verbose.File&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Forensic&quot;</span><span class="w"> </span><span class="na">Description=</span><span class="s">&quot;Forensic investigation profile&quot;</span><span class="w"> </span><span class="na">LoggingMode=</span><span class="s">&quot;File&quot;</span><span class="w"> </span><span class="na">DetailLevel=</span><span class="s">&quot;Verbose&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a><span class="w">      </span><span class="nt">&lt;Collectors&gt;</span>
+<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a><span class="w">        </span><span class="nt">&lt;SystemCollectorId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;ForensicSystemCollector&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a><span class="w">          </span><span class="nt">&lt;SystemProviderId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;ForensicSystemProvider&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a><span class="w">        </span><span class="nt">&lt;/SystemCollectorId&gt;</span>
+<a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a><span class="w">        </span><span class="nt">&lt;EventCollectorId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;ForensicEventCollector&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a><span class="w">          </span><span class="nt">&lt;EventProviderId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;Microsoft-Windows-Kernel-Process&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a><span class="w">          </span><span class="nt">&lt;EventProviderId</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;Microsoft-Windows-Security-Auditing&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a><span class="w">        </span><span class="nt">&lt;/EventCollectorId&gt;</span>
+<a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a><span class="w">      </span><span class="nt">&lt;/Collectors&gt;</span>
+<a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a><span class="w">    </span><span class="nt">&lt;/Profile&gt;</span>
+<a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a><span class="w">  </span><span class="nt">&lt;/Profiles&gt;</span>
+<a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a><span class="nt">&lt;/WindowsPerformanceRecorder&gt;</span>
+</code></pre></div></p>
+<h4 id="analyse-des-traces-de-performance">Analyse des traces de performance<a class="headerlink" href="#analyse-des-traces-de-performance" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse des processus</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c"># Extraire les données de processus depuis WPA</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">function</span> <span class="n">Extract-ProcessData</span> <span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$ETLFile</span><span class="p">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="c"># Utiliser WPA en mode ligne de commande</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="nv">$wpaScript</span> <span class="p">=</span> <span class="sh">@&quot;</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="sh">    import sys</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="sh">    from wpa import *</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="sh">    # Ouvrir la trace</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="sh">    trace = Analysis()</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="sh">    trace.open(&#39;$ETLFile&#39;)</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="sh">    # Extraire les données de processus</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="sh">    process_table = trace.get_table(&#39;Processes&#39;)</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="sh">    for row in process_table:</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="sh">        print(f&quot;Process: {row.Process}, PID: {row.ProcessId}, Start: {row.CreateTime}&quot;)</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="sh">&quot;@</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>    <span class="c"># Sauvegarder le script</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>    <span class="nv">$wpaScript</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&quot;extract_processes.py&quot;</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>    <span class="c"># Exécuter avec WPA</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>    <span class="n">wpa</span><span class="p">.</span><span class="n">exe</span> <span class="n">-i</span> <span class="nv">$ETLFile</span> <span class="n">-script</span> <span class="n">extract_processes</span><span class="p">.</span><span class="n">py</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Analyse des I/O disque</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">function</span> <span class="n">Analyze-DiskIO</span> <span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$ETLFile</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="c"># Script WPA pour analyser les I/O</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="nv">$ioScript</span> <span class="p">=</span> <span class="sh">@&quot;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="sh">    trace = Analysis()</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="sh">    trace.open(&#39;$ETLFile&#39;)</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="sh">    # Table des I/O disque</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="sh">    disk_table = trace.get_table(&#39;Disk Usage&#39;)</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="sh">    suspicious_io = []</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="sh">    for row in disk_table:</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="sh">        if row.Size &gt; 10485760:  # 10MB</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="sh">            suspicious_io.append({</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="sh">                &#39;Process&#39;: row.Process,</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="sh">                &#39;File&#39;: row.FileName,</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="sh">                &#39;Size&#39;: row.Size,</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="sh">                &#39;Time&#39;: row.Timestamp</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="sh">            })</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="sh">    for io in suspicious_io:</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="sh">        print(f&quot;Large I/O: {io[&#39;Process&#39;]} -&gt; {io[&#39;File&#39;]} ({io[&#39;Size&#39;]} bytes)&quot;)</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="sh">&quot;@</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>    <span class="nv">$ioScript</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&quot;analyze_disk_io.py&quot;</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>    <span class="n">wpa</span><span class="p">.</span><span class="n">exe</span> <span class="n">-i</span> <span class="nv">$ETLFile</span> <span class="n">-script</span> <span class="n">analyze_disk_io</span><span class="p">.</span><span class="n">py</span>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="correlation-avec-les-incidents">Corrélation avec les incidents<a class="headerlink" href="#correlation-avec-les-incidents" title="Permanent link">&para;</a></h3>
+<h4 id="timeline-des-evenements">Timeline des événements<a class="headerlink" href="#timeline-des-evenements" title="Permanent link">&para;</a></h4>
+<p><strong>Création de timeline</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">function</span> <span class="n">Create-IncidentTimeline</span> <span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="k">param</span><span class="p">(</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>        <span class="no">[string]</span><span class="nv">$ETLFile</span><span class="p">,</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>        <span class="no">[datetime]</span><span class="nv">$IncidentTime</span><span class="p">,</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="no">[int]</span><span class="nv">$WindowMinutes</span> <span class="p">=</span> <span class="n">30</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="p">)</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="nv">$startTime</span> <span class="p">=</span> <span class="nv">$IncidentTime</span><span class="p">.</span><span class="n">AddMinutes</span><span class="p">(-</span><span class="nv">$WindowMinutes</span><span class="p">)</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    <span class="nv">$endTime</span> <span class="p">=</span> <span class="nv">$IncidentTime</span><span class="p">.</span><span class="n">AddMinutes</span><span class="p">(</span><span class="nv">$WindowMinutes</span><span class="p">)</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="c"># Événements ETW</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>    <span class="nv">$etwEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="nv">$ETLFile</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>        <span class="n">StartTime</span> <span class="p">=</span> <span class="nv">$startTime</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>        <span class="n">EndTime</span> <span class="p">=</span> <span class="nv">$endTime</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>    <span class="p">}</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>    <span class="c"># Événements système</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>    <span class="nv">$systemEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-LogName</span> <span class="s2">&quot;System&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>        <span class="n">StartTime</span> <span class="p">=</span> <span class="nv">$startTime</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>        <span class="n">EndTime</span> <span class="p">=</span> <span class="nv">$endTime</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>    <span class="p">}</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>    <span class="c"># Événements de sécurité</span>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>    <span class="nv">$securityEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-LogName</span> <span class="s2">&quot;Security&quot;</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span>
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>        <span class="n">StartTime</span> <span class="p">=</span> <span class="nv">$startTime</span>
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>        <span class="n">EndTime</span> <span class="p">=</span> <span class="nv">$endTime</span>
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a>    <span class="p">}</span>
+<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a>
+<a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a>    <span class="c"># Combiner et trier</span>
+<a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a>    <span class="nv">$allEvents</span> <span class="p">=</span> <span class="p">@()</span>
+<a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a>    <span class="nv">$allEvents</span> <span class="p">+=</span> <span class="nv">$etwEvents</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="p">@{</span><span class="n">Source</span><span class="p">=</span><span class="s2">&quot;ETW&quot;</span><span class="p">;</span> <span class="n">Event</span><span class="p">=</span><span class="nv">$_</span><span class="p">}</span> <span class="p">}</span>
+<a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a>    <span class="nv">$allEvents</span> <span class="p">+=</span> <span class="nv">$systemEvents</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="p">@{</span><span class="n">Source</span><span class="p">=</span><span class="s2">&quot;System&quot;</span><span class="p">;</span> <span class="n">Event</span><span class="p">=</span><span class="nv">$_</span><span class="p">}</span> <span class="p">}</span>
+<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a>    <span class="nv">$allEvents</span> <span class="p">+=</span> <span class="nv">$securityEvents</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="p">@{</span><span class="n">Source</span><span class="p">=</span><span class="s2">&quot;Security&quot;</span><span class="p">;</span> <span class="n">Event</span><span class="p">=</span><span class="nv">$_</span><span class="p">}</span> <span class="p">}</span>
+<a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a>
+<a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a>    <span class="nv">$timeline</span> <span class="p">=</span> <span class="nv">$allEvents</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">TimeCreated</span><span class="p">}</span>
+<a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a>
+<a id="__codelineno-16-37" name="__codelineno-16-37" href="#__codelineno-16-37"></a>    <span class="c"># Exporter la timeline</span>
+<a id="__codelineno-16-38" name="__codelineno-16-38" href="#__codelineno-16-38"></a>    <span class="nv">$timeline</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a>        <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+<a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a>            <span class="n">TimeCreated</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a>            <span class="n">Source</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Source</span>
+<a id="__codelineno-16-42" name="__codelineno-16-42" href="#__codelineno-16-42"></a>            <span class="n">Id</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">Id</span>
+<a id="__codelineno-16-43" name="__codelineno-16-43" href="#__codelineno-16-43"></a>            <span class="n">Level</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">LevelDisplayName</span>
+<a id="__codelineno-16-44" name="__codelineno-16-44" href="#__codelineno-16-44"></a>            <span class="n">Message</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">Message</span>
+<a id="__codelineno-16-45" name="__codelineno-16-45" href="#__codelineno-16-45"></a>        <span class="p">}</span>
+<a id="__codelineno-16-46" name="__codelineno-16-46" href="#__codelineno-16-46"></a>    <span class="p">}</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="s2">&quot;incident_timeline.csv&quot;</span> <span class="n">-NoTypeInformation</span>
+<a id="__codelineno-16-47" name="__codelineno-16-47" href="#__codelineno-16-47"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="analyse-des-anomalies">Analyse des anomalies<a class="headerlink" href="#analyse-des-anomalies" title="Permanent link">&para;</a></h4>
+<p><strong>Détection d'anomalies de performance</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">function</span> <span class="n">Detect-PerformanceAnomalies</span> <span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$ETLFile</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="c"># Analyser les métriques de performance</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="nv">$performanceScript</span> <span class="p">=</span> <span class="sh">@&quot;</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="sh">    trace = Analysis()</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="sh">    trace.open(&#39;$ETLFile&#39;)</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="sh">    # CPU Usage</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="sh">    cpu_table = trace.get_table(&#39;CPU Usage (Sampled)&#39;)</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="sh">    cpu_usage = {}</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="sh">    for row in cpu_table:</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="sh">        process = row.Process</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="sh">        if process not in cpu_usage:</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="sh">            cpu_usage[process] = 0</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="sh">        cpu_usage[process] += row.Weight</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="sh">    # Détecter les processus avec utilisation CPU élevée</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="sh">    for process, usage in cpu_usage.items():</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="sh">        if usage &gt; 80:  # Plus de 80% CPU</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="sh">            print(f&quot;High CPU usage: {process} - {usage}%&quot;)</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="sh">    # Memory Usage</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="sh">    memory_table = trace.get_table(&#39;Virtual Memory Snapshots&#39;)</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="sh">    memory_usage = {}</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="sh">    for row in memory_table:</span>
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="sh">        process = row.Process</span>
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="sh">        if process not in memory_usage:</span>
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="sh">            memory_usage[process] = 0</span>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="sh">        memory_usage[process] += row.Size</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a><span class="sh">    # Détecter les processus avec utilisation mémoire élevée</span>
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a><span class="sh">    for process, usage in memory_usage.items():</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a><span class="sh">        if usage &gt; 1073741824:  # Plus de 1GB</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a><span class="sh">            print(f&quot;High memory usage: {process} - {usage/1073741824:.2f}GB&quot;)</span>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a><span class="sh">&quot;@</span>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>    <span class="nv">$performanceScript</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&quot;detect_anomalies.py&quot;</span>
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>    <span class="n">wpa</span><span class="p">.</span><span class="n">exe</span> <span class="n">-i</span> <span class="nv">$ETLFile</span> <span class="n">-script</span> <span class="n">detect_anomalies</span><span class="p">.</span><span class="n">py</span>
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="optimisation-des-analyses">Optimisation des analyses<a class="headerlink" href="#optimisation-des-analyses" title="Permanent link">&para;</a></h3>
+<h4 id="filtrage-des-donnees">Filtrage des données<a class="headerlink" href="#filtrage-des-donnees" title="Permanent link">&para;</a></h4>
+<p><strong>Filtres WPA</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="cm">&lt;!-- Filtre pour processus spécifiques --&gt;</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">&lt;Filter</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;SuspiciousProcesses&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">&lt;Column</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;Process&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="nt">&lt;Value&gt;</span>powershell.exe<span class="nt">&lt;/Value&gt;</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nt">&lt;Value&gt;</span>cmd.exe<span class="nt">&lt;/Value&gt;</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="nt">&lt;Value&gt;</span>rundll32.exe<span class="nt">&lt;/Value&gt;</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span><span class="nt">&lt;Value&gt;</span>regsvr32.exe<span class="nt">&lt;/Value&gt;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">  </span><span class="nt">&lt;/Column&gt;</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="nt">&lt;/Filter&gt;</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="cm">&lt;!-- Filtre temporel --&gt;</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="nt">&lt;Filter</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;IncidentTimeframe&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">  </span><span class="nt">&lt;Column</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;TimeStamp&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">    </span><span class="nt">&lt;Range</span><span class="w"> </span><span class="na">Start=</span><span class="s">&quot;2024-01-15T14:00:00&quot;</span><span class="w"> </span><span class="na">End=</span><span class="s">&quot;2024-01-15T16:00:00&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">  </span><span class="nt">&lt;/Column&gt;</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="nt">&lt;/Filter&gt;</span>
+</code></pre></div></p>
+<h2 id="powershell-forensics-analyse-des-scripts">PowerShell Forensics - Analyse des scripts<a class="headerlink" href="#powershell-forensics-analyse-des-scripts" title="Permanent link">&para;</a></h2>
+<h3 id="vue-densemble-de-powershell-forensics">Vue d'ensemble de PowerShell Forensics<a class="headerlink" href="#vue-densemble-de-powershell-forensics" title="Permanent link">&para;</a></h3>
+<p>PowerShell étant largement utilisé par les attaquants, son analyse forensique est cruciale pour comprendre les activités malveillantes.</p>
+<h4 id="sources-dartefacts-powershell">Sources d'artefacts PowerShell<a class="headerlink" href="#sources-dartefacts-powershell" title="Permanent link">&para;</a></h4>
+<p><strong>Logs PowerShell</strong>
+- Microsoft-Windows-PowerShell/Operational
+- Microsoft-Windows-PowerShell/Analytic
+- Windows PowerShell.evtx</p>
+<p><strong>Fichiers de configuration</strong>
+- Profile.ps1
+- Modules personnalisés
+- Historique des commandes</p>
+<p><strong>Artefacts mémoire</strong>
+- Processus PowerShell
+- Modules chargés
+- Variables d'environnement</p>
+<h3 id="logs-powershell">Logs PowerShell<a class="headerlink" href="#logs-powershell" title="Permanent link">&para;</a></h3>
+<h4 id="configuration-du-logging">Configuration du logging<a class="headerlink" href="#configuration-du-logging" title="Permanent link">&para;</a></h4>
+<p><strong>Activation du logging avancé</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c"># Via Group Policy ou Registry</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nb">Set-ItemProperty</span> <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging&quot;</span> <span class="n">-Name</span> <span class="s2">&quot;EnableModuleLogging&quot;</span> <span class="n">-Value</span> <span class="n">1</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nb">Set-ItemProperty</span> <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging&quot;</span> <span class="n">-Name</span> <span class="s2">&quot;EnableScriptBlockLogging&quot;</span> <span class="n">-Value</span> <span class="n">1</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="nb">Set-ItemProperty</span> <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription&quot;</span> <span class="n">-Name</span> <span class="s2">&quot;EnableTranscripting&quot;</span> <span class="n">-Value</span> <span class="n">1</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nb">Set-ItemProperty</span> <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription&quot;</span> <span class="n">-Name</span> <span class="s2">&quot;OutputDirectory&quot;</span> <span class="n">-Value</span> <span class="s2">&quot;C:\PSTranscripts&quot;</span>
+</code></pre></div></p>
+<p><strong>Configuration via GPO</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="cm">&lt;!-- PowerShell Logging GPO --&gt;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">&lt;policy&gt;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">&lt;name&gt;</span>Turn<span class="w"> </span>on<span class="w"> </span>PowerShell<span class="w"> </span>Script<span class="w"> </span>Block<span class="w"> </span>Logging<span class="nt">&lt;/name&gt;</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nt">&lt;state&gt;</span>Enabled<span class="nt">&lt;/state&gt;</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="nt">&lt;registry&gt;</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="nt">&lt;path&gt;</span>HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging<span class="nt">&lt;/path&gt;</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">    </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;EnableScriptBlockLogging&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;REG_DWORD&quot;</span><span class="w"> </span><span class="na">data=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">  </span><span class="nt">&lt;/registry&gt;</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="nt">&lt;/policy&gt;</span>
+</code></pre></div></p>
+<h4 id="analyse-des-logs">Analyse des logs<a class="headerlink" href="#analyse-des-logs" title="Permanent link">&para;</a></h4>
+<p><strong>Event ID 4104 - Script Block Logging</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c"># Analyser les script blocks</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-PowerShell/Operational&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">4104</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    <span class="nv">$scriptBlock</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ScriptBlockText&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>    <span class="nv">$scriptBlockId</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ScriptBlockId&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>    <span class="nv">$path</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;Path&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>        <span class="n">TimeCreated</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>        <span class="n">ScriptBlockId</span> <span class="p">=</span> <span class="nv">$scriptBlockId</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>        <span class="n">Path</span> <span class="p">=</span> <span class="nv">$path</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>        <span class="n">ScriptBlock</span> <span class="p">=</span> <span class="nv">$scriptBlock</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>    <span class="p">}</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="p">}</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">ScriptBlock</span> <span class="o">-match</span> <span class="s2">&quot;invoke-|download|iex|iwr|empire|mimikatz&quot;</span><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Event ID 4103 - Module Logging</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c"># Analyser les modules chargés</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-PowerShell/Operational&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">4103</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    <span class="nv">$commandName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;CommandName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="nv">$commandType</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;CommandType&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    <span class="nv">$hostName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;HostName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="nv">$commandLine</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;CommandLine&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>        <span class="n">TimeCreated</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">TimeCreated</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>        <span class="n">CommandName</span> <span class="p">=</span> <span class="nv">$commandName</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>        <span class="n">CommandType</span> <span class="p">=</span> <span class="nv">$commandType</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>        <span class="n">HostName</span> <span class="p">=</span> <span class="nv">$hostName</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>        <span class="n">CommandLine</span> <span class="p">=</span> <span class="nv">$commandLine</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>    <span class="p">}</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="analyse-des-scripts-malveillants">Analyse des scripts malveillants<a class="headerlink" href="#analyse-des-scripts-malveillants" title="Permanent link">&para;</a></h3>
+<h4 id="detection-de-patterns-malveillants">Détection de patterns malveillants<a class="headerlink" href="#detection-de-patterns-malveillants" title="Permanent link">&para;</a></h4>
+<p><strong>Indicateurs communs</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">function</span> <span class="n">Detect-MaliciousPatterns</span> <span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$ScriptContent</span><span class="p">)</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>    <span class="nv">$maliciousPatterns</span> <span class="p">=</span> <span class="p">@(</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>        <span class="s2">&quot;Invoke-Expression&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>        <span class="s2">&quot;IEX&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>        <span class="s2">&quot;Invoke-WebRequest&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>        <span class="s2">&quot;IWR&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>        <span class="s2">&quot;DownloadString&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>        <span class="s2">&quot;DownloadFile&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>        <span class="s2">&quot;System.Net.WebClient&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>        <span class="s2">&quot;New-Object Net.WebClient&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>        <span class="s2">&quot;Start-Process&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>        <span class="s2">&quot;cmd.exe /c&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>        <span class="s2">&quot;powershell.exe -e&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>        <span class="s2">&quot;powershell.exe -en&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>        <span class="s2">&quot;powershell.exe -enc&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>        <span class="s2">&quot;FromBase64String&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a>        <span class="s2">&quot;Convert.*Base64&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a>        <span class="s2">&quot;Reflection.Assembly&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a>        <span class="s2">&quot;System.Reflection.Assembly&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a>        <span class="s2">&quot;Load.*Assembly&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a>        <span class="s2">&quot;Invoke-Mimikatz&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a>        <span class="s2">&quot;Invoke-Kerberoast&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a>        <span class="s2">&quot;Invoke-BloodHound&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a>        <span class="s2">&quot;Empire&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-27" name="__codelineno-23-27" href="#__codelineno-23-27"></a>        <span class="s2">&quot;Metasploit&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-28" name="__codelineno-23-28" href="#__codelineno-23-28"></a>        <span class="s2">&quot;Meterpreter&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-29" name="__codelineno-23-29" href="#__codelineno-23-29"></a>        <span class="s2">&quot;Add-Type&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-30" name="__codelineno-23-30" href="#__codelineno-23-30"></a>        <span class="s2">&quot;DllImport&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-31" name="__codelineno-23-31" href="#__codelineno-23-31"></a>        <span class="s2">&quot;VirtualAlloc&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-32" name="__codelineno-23-32" href="#__codelineno-23-32"></a>        <span class="s2">&quot;CreateThread&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-33" name="__codelineno-23-33" href="#__codelineno-23-33"></a>        <span class="s2">&quot;WaitForSingleObject&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-34" name="__codelineno-23-34" href="#__codelineno-23-34"></a>        <span class="s2">&quot;kernel32&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-35" name="__codelineno-23-35" href="#__codelineno-23-35"></a>        <span class="s2">&quot;ntdll&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-36" name="__codelineno-23-36" href="#__codelineno-23-36"></a>        <span class="s2">&quot;Get-Process.*Stop-Process&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-37" name="__codelineno-23-37" href="#__codelineno-23-37"></a>        <span class="s2">&quot;Get-Service.*Stop-Service&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-38" name="__codelineno-23-38" href="#__codelineno-23-38"></a>        <span class="s2">&quot;Remove-Item.*-Recurse&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-39" name="__codelineno-23-39" href="#__codelineno-23-39"></a>        <span class="s2">&quot;Clear-EventLog&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-40" name="__codelineno-23-40" href="#__codelineno-23-40"></a>        <span class="s2">&quot;wevtutil.*cl&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-41" name="__codelineno-23-41" href="#__codelineno-23-41"></a>        <span class="s2">&quot;Get-EventLog.*Clear-EventLog&quot;</span>
+<a id="__codelineno-23-42" name="__codelineno-23-42" href="#__codelineno-23-42"></a>    <span class="p">)</span>
+<a id="__codelineno-23-43" name="__codelineno-23-43" href="#__codelineno-23-43"></a>
+<a id="__codelineno-23-44" name="__codelineno-23-44" href="#__codelineno-23-44"></a>    <span class="nv">$detectedPatterns</span> <span class="p">=</span> <span class="p">@()</span>
+<a id="__codelineno-23-45" name="__codelineno-23-45" href="#__codelineno-23-45"></a>
+<a id="__codelineno-23-46" name="__codelineno-23-46" href="#__codelineno-23-46"></a>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$pattern</span> <span class="k">in</span> <span class="nv">$maliciousPatterns</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-23-47" name="__codelineno-23-47" href="#__codelineno-23-47"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="nv">$pattern</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-23-48" name="__codelineno-23-48" href="#__codelineno-23-48"></a>            <span class="nv">$detectedPatterns</span> <span class="p">+=</span> <span class="nv">$pattern</span>
+<a id="__codelineno-23-49" name="__codelineno-23-49" href="#__codelineno-23-49"></a>        <span class="p">}</span>
+<a id="__codelineno-23-50" name="__codelineno-23-50" href="#__codelineno-23-50"></a>    <span class="p">}</span>
+<a id="__codelineno-23-51" name="__codelineno-23-51" href="#__codelineno-23-51"></a>
+<a id="__codelineno-23-52" name="__codelineno-23-52" href="#__codelineno-23-52"></a>    <span class="k">return</span> <span class="nv">$detectedPatterns</span>
+<a id="__codelineno-23-53" name="__codelineno-23-53" href="#__codelineno-23-53"></a><span class="p">}</span>
+<a id="__codelineno-23-54" name="__codelineno-23-54" href="#__codelineno-23-54"></a>
+<a id="__codelineno-23-55" name="__codelineno-23-55" href="#__codelineno-23-55"></a><span class="c"># Exemple d&#39;utilisation</span>
+<a id="__codelineno-23-56" name="__codelineno-23-56" href="#__codelineno-23-56"></a><span class="nv">$scriptContent</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="s2">&quot;suspicious_script.ps1&quot;</span> <span class="n">-Raw</span>
+<a id="__codelineno-23-57" name="__codelineno-23-57" href="#__codelineno-23-57"></a><span class="nv">$patterns</span> <span class="p">=</span> <span class="n">Detect-MaliciousPatterns</span> <span class="n">-ScriptContent</span> <span class="nv">$scriptContent</span>
+<a id="__codelineno-23-58" name="__codelineno-23-58" href="#__codelineno-23-58"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$patterns</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-23-59" name="__codelineno-23-59" href="#__codelineno-23-59"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Malicious patterns detected: </span><span class="p">$(</span><span class="nv">$patterns</span> <span class="n">-join</span> <span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-23-60" name="__codelineno-23-60" href="#__codelineno-23-60"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="deobfuscation-de-scripts">Déobfuscation de scripts<a class="headerlink" href="#deobfuscation-de-scripts" title="Permanent link">&para;</a></h4>
+<p><strong>Déobfuscation basique</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">function</span> <span class="n">Deobfuscate-PowerShellScript</span> <span class="p">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$ObfuscatedScript</span><span class="p">)</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>    <span class="c"># Remplacer les variables communes</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>    <span class="nv">$deobfuscated</span> <span class="p">=</span> <span class="nv">$ObfuscatedScript</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>    <span class="nv">$deobfuscated</span> <span class="p">=</span> <span class="nv">$deobfuscated</span> <span class="o">-replace</span> <span class="s1">&#39;\$env:.*?\+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="nv">$deobfuscated</span> <span class="p">=</span> <span class="nv">$deobfuscated</span> <span class="o">-replace</span> <span class="s1">&#39;\${.*?}&#39;</span><span class="p">,</span> <span class="s1">&#39;VAR&#39;</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>    <span class="nv">$deobfuscated</span> <span class="p">=</span> <span class="nv">$deobfuscated</span> <span class="o">-replace</span> <span class="s1">&#39;\[char\]\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;CHAR&#39;</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>    <span class="c"># Décoder Base64</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>    <span class="nv">$base64Pattern</span> <span class="p">=</span> <span class="s1">&#39;[A-Za-z0-9+/]+=*&#39;</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>    <span class="nv">$base64Matches</span> <span class="p">=</span> <span class="no">[regex]</span><span class="p">::</span><span class="n">Matches</span><span class="p">(</span><span class="nv">$deobfuscated</span><span class="p">,</span> <span class="nv">$base64Pattern</span><span class="p">)</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$match</span> <span class="k">in</span> <span class="nv">$base64Matches</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$match</span><span class="p">.</span><span class="n">Value</span><span class="p">.</span><span class="n">Length</span> <span class="o">-gt</span> <span class="n">20</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>            <span class="k">try</span> <span class="p">{</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>                <span class="nv">$decoded</span> <span class="p">=</span> <span class="no">[System.Text.Encoding]</span><span class="p">::</span><span class="n">UTF8</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="no">[System.Convert]</span><span class="p">::</span><span class="n">FromBase64String</span><span class="p">(</span><span class="nv">$match</span><span class="p">.</span><span class="n">Value</span><span class="p">))</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>                <span class="nv">$deobfuscated</span> <span class="p">=</span> <span class="nv">$deobfuscated</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="nv">$match</span><span class="p">.</span><span class="n">Value</span><span class="p">,</span> <span class="nv">$decoded</span><span class="p">)</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>            <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>                <span class="c"># Ignore invalid base64</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>            <span class="p">}</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>        <span class="p">}</span>
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>    <span class="p">}</span>
+<a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a>
+<a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a>    <span class="c"># Remplacer les concaténations</span>
+<a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a>    <span class="nv">$deobfuscated</span> <span class="p">=</span> <span class="nv">$deobfuscated</span> <span class="o">-replace</span> <span class="s1">&#39;\+\s*&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+<a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a>    <span class="nv">$deobfuscated</span> <span class="p">=</span> <span class="nv">$deobfuscated</span> <span class="o">-replace</span> <span class="s2">&quot;&#39;&#39;\s*\+\s*&#39;&#39;&quot;</span>
+<a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a>
+<a id="__codelineno-24-29" name="__codelineno-24-29" href="#__codelineno-24-29"></a>    <span class="k">return</span> <span class="nv">$deobfuscated</span>
+<a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="techniques-devasion-powershell">Techniques d'évasion PowerShell<a class="headerlink" href="#techniques-devasion-powershell" title="Permanent link">&para;</a></h3>
+<h4 id="obfuscation-courante">Obfuscation courante<a class="headerlink" href="#obfuscation-courante" title="Permanent link">&para;</a></h4>
+<p><strong>Invoke-Obfuscation</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c"># Exemples d&#39;obfuscation détectés</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nv">$obfuscatedExamples</span> <span class="p">=</span> <span class="p">@(</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>    <span class="c"># Concatenation</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>    <span class="s2">&quot;(&#39;In&#39;+&#39;voke-Ex&#39;+&#39;pression&#39;)&quot;</span><span class="p">,</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>    <span class="c"># Character codes</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>    <span class="s2">&quot;[char]73+[char]110+[char]118+[char]111+[char]107+[char]101&quot;</span><span class="p">,</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>    <span class="c"># Variable substitution</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>    <span class="s1">&#39;$a=&#39;</span><span class="p">+</span><span class="s2">&quot;&#39;&quot;</span><span class="p">+</span><span class="s1">&#39;Invoke-Expression&#39;</span><span class="p">+</span><span class="s2">&quot;&#39;&quot;</span><span class="p">+</span><span class="s1">&#39;;IEX $a&#39;</span><span class="p">,</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>    <span class="c"># Format strings</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>    <span class="s2">&quot;&#39;{0}{1}{2}&#39; -f &#39;Inv&#39;,&#39;oke-Ex&#39;,&#39;pression&#39;&quot;</span><span class="p">,</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>    <span class="c"># Reverse strings</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>    <span class="s2">&quot;&#39;noisserpxE-ekovnI&#39;[-1..-16] -join &#39;&#39;&quot;</span><span class="p">,</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>    <span class="c"># Base64 encoding</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>    <span class="s2">&quot;([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(&#39;SW52b2tlLUV4cHJlc3Npb24=&#39;)))&quot;</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a><span class="p">)</span>
+</code></pre></div></p>
+<h4 id="detection-devasion">Détection d'évasion<a class="headerlink" href="#detection-devasion" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse des techniques d'évasion</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">function</span> <span class="n">Detect-EvasionTechniques</span> <span class="p">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$ScriptContent</span><span class="p">)</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>    <span class="nv">$evasionTechniques</span> <span class="p">=</span> <span class="p">@()</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>    <span class="c"># Détection de base64</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="s1">&#39;FromBase64String|Convert.*Base64&#39;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>        <span class="nv">$evasionTechniques</span> <span class="p">+=</span> <span class="s2">&quot;Base64 Encoding&quot;</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>    <span class="p">}</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>    <span class="c"># Détection de concaténation</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="s2">&quot;&#39;\+&#39;|&#39;&#39;\s*\+\s*&#39;&#39;&quot;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>        <span class="nv">$evasionTechniques</span> <span class="p">+=</span> <span class="s2">&quot;String Concatenation&quot;</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>    <span class="p">}</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a>
+<a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a>    <span class="c"># Détection de format strings</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="s1">&#39;-f\s+&#39;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a>        <span class="nv">$evasionTechniques</span> <span class="p">+=</span> <span class="s2">&quot;Format String&quot;</span>
+<a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a>    <span class="p">}</span>
+<a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a>
+<a id="__codelineno-26-21" name="__codelineno-26-21" href="#__codelineno-26-21"></a>    <span class="c"># Détection de caractères ASCII</span>
+<a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="s1">&#39;\[char\]\d+&#39;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a>        <span class="nv">$evasionTechniques</span> <span class="p">+=</span> <span class="s2">&quot;ASCII Character Codes&quot;</span>
+<a id="__codelineno-26-24" name="__codelineno-26-24" href="#__codelineno-26-24"></a>    <span class="p">}</span>
+<a id="__codelineno-26-25" name="__codelineno-26-25" href="#__codelineno-26-25"></a>
+<a id="__codelineno-26-26" name="__codelineno-26-26" href="#__codelineno-26-26"></a>    <span class="c"># Détection de variables</span>
+<a id="__codelineno-26-27" name="__codelineno-26-27" href="#__codelineno-26-27"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="s1">&#39;\$\w+\s*=\s*[&#39;&#39;&quot;].*[&#39;&#39;&quot;]&#39;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-28" name="__codelineno-26-28" href="#__codelineno-26-28"></a>        <span class="nv">$evasionTechniques</span> <span class="p">+=</span> <span class="s2">&quot;Variable Substitution&quot;</span>
+<a id="__codelineno-26-29" name="__codelineno-26-29" href="#__codelineno-26-29"></a>    <span class="p">}</span>
+<a id="__codelineno-26-30" name="__codelineno-26-30" href="#__codelineno-26-30"></a>
+<a id="__codelineno-26-31" name="__codelineno-26-31" href="#__codelineno-26-31"></a>    <span class="c"># Détection de compression</span>
+<a id="__codelineno-26-32" name="__codelineno-26-32" href="#__codelineno-26-32"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="s1">&#39;IO\.Compression|GZipStream&#39;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-33" name="__codelineno-26-33" href="#__codelineno-26-33"></a>        <span class="nv">$evasionTechniques</span> <span class="p">+=</span> <span class="s2">&quot;Compression&quot;</span>
+<a id="__codelineno-26-34" name="__codelineno-26-34" href="#__codelineno-26-34"></a>    <span class="p">}</span>
+<a id="__codelineno-26-35" name="__codelineno-26-35" href="#__codelineno-26-35"></a>
+<a id="__codelineno-26-36" name="__codelineno-26-36" href="#__codelineno-26-36"></a>    <span class="c"># Détection de split/join</span>
+<a id="__codelineno-26-37" name="__codelineno-26-37" href="#__codelineno-26-37"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ScriptContent</span> <span class="o">-match</span> <span class="s1">&#39;split|join&#39;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-38" name="__codelineno-26-38" href="#__codelineno-26-38"></a>        <span class="nv">$evasionTechniques</span> <span class="p">+=</span> <span class="s2">&quot;Split/Join Operations&quot;</span>
+<a id="__codelineno-26-39" name="__codelineno-26-39" href="#__codelineno-26-39"></a>    <span class="p">}</span>
+<a id="__codelineno-26-40" name="__codelineno-26-40" href="#__codelineno-26-40"></a>
+<a id="__codelineno-26-41" name="__codelineno-26-41" href="#__codelineno-26-41"></a>    <span class="k">return</span> <span class="nv">$evasionTechniques</span>
+<a id="__codelineno-26-42" name="__codelineno-26-42" href="#__codelineno-26-42"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="outils-danalyse-powershell">Outils d'analyse PowerShell<a class="headerlink" href="#outils-danalyse-powershell" title="Permanent link">&para;</a></h3>
+<h4 id="powershell-empire-detection">PowerShell Empire Detection<a class="headerlink" href="#powershell-empire-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Détection d'Empire</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">function</span> <span class="n">Detect-PowerShellEmpire</span> <span class="p">{</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>    <span class="k">param</span><span class="p">(</span><span class="no">[string]</span><span class="nv">$LogPath</span><span class="p">)</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="nv">$empireIndicators</span> <span class="p">=</span> <span class="p">@(</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>        <span class="s2">&quot;Microsoft.PowerShell.Commands.InvokeExpressionCommand&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>        <span class="s2">&quot;System.Management.Automation.AmsiUtils&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>        <span class="s2">&quot;Invoke-Empire&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>        <span class="s2">&quot;powershell.exe.*-W Hidden.*-nop&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>        <span class="s2">&quot;powershell.exe.*-windowstyle hidden&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>        <span class="s2">&quot;Empire&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>        <span class="s2">&quot;stage0&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>        <span class="s2">&quot;stage1&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>        <span class="s2">&quot;stage2&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>        <span class="s2">&quot;checkin&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>        <span class="s2">&quot;tasking&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>        <span class="s2">&quot;JobTracking&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>        <span class="s2">&quot;StagingKey&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>        <span class="s2">&quot;SessionKey&quot;</span>
+<a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>    <span class="p">)</span>
+<a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a>
+<a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a>    <span class="nv">$empireEvents</span> <span class="p">=</span> <span class="nb">Get-WinEvent</span> <span class="n">-Path</span> <span class="nv">$LogPath</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-PowerShell/Operational&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
+<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>        <span class="nv">$message</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Message</span>
+<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a>        <span class="nv">$empireIndicators</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$message</span> <span class="o">-match</span> <span class="nv">$_</span> <span class="p">}</span>
+<a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a>    <span class="p">}</span>
+<a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a>
+<a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a>    <span class="k">return</span> <span class="nv">$empireEvents</span>
+<a id="__codelineno-27-27" name="__codelineno-27-27" href="#__codelineno-27-27"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="revoke-obfuscation">Revoke-Obfuscation<a class="headerlink" href="#revoke-obfuscation" title="Permanent link">&para;</a></h4>
+<p><strong>Utilisation de Revoke-Obfuscation</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nb">Import-Module</span> <span class="nb">Revoke-Obfuscation</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="c"># Analyser un script obfusqué</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="nv">$scriptContent</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="s2">&quot;obfuscated_script.ps1&quot;</span> <span class="n">-Raw</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="nv">$results</span> <span class="p">=</span> <span class="nb">Measure-RvoObfuscation</span> <span class="n">-ScriptBlock</span> <span class="nv">$scriptContent</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="c"># Afficher les résultats</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="nv">$results</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">-AutoSize</span>
+</code></pre></div></p>
+<p>Cette approche complète permet d'analyser efficacement les artefacts ETW, les performances système et les activités PowerShell dans un contexte forensique.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

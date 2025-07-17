@@ -1,0 +1,2362 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../acquisition-preservation/">
+      
+      
+        <link rel="next" href="../malware-analysis/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Network Analysis - AI-Based Audio Mixing and Mastering</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analyse-reseau-pour-la-forensique-windows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="AI-Based Audio Mixing and Mastering" class="md-header__button md-logo" aria-label="AI-Based Audio Mixing and Mastering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI-Based Audio Mixing and Mastering
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../usage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Usage Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../data/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Data Handling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../notebooks/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Notebooks
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../inference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api_reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../windows-fundamentals/" class="md-tabs__link">
+          
+  
+  
+  Windows DFIR
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ci_cd/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CI/CD
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AI-Based Audio Mixing and Mastering" class="md-nav__button md-logo" aria-label="AI-Based Audio Mixing and Mastering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI-Based Audio Mixing and Mastering
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Handling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notebooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Windows DFIR
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Windows DFIR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acquisition-preservation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Acquisition & Preservation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Network Analysis
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network Analysis
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-forensics-sur-windows-analyse-des-communications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Forensics sur Windows - Analyse des communications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Forensics sur Windows - Analyse des communications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-de-lanalyse-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble de l'analyse réseau
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble de l&#39;analyse réseau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectifs-de-lanalyse-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectifs de l'analyse réseau
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture-de-trafic-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture de trafic réseau
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capture de trafic réseau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#outils-de-capture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils de capture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-avancee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration avancée
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-connexions-tcpudp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des connexions TCP/UDP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des connexions TCP/UDP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-flux-tcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des flux TCP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-udp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse UDP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-reseau-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs réseau Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logs réseau Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#event-logs-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Logs réseau
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sysmon-network-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sysmon Network Events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-dactivites-malveillantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection d'activités malveillantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Détection d&#39;activités malveillantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indicateurs-de-compromission-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indicateurs de compromission réseau
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-protocoles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des protocoles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analyse-des-shares-et-rpc-communication-inter-processus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des Shares et RPC - Communication inter-processus
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des Shares et RPC - Communication inter-processus">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smbcifs-forensics" class="md-nav__link">
+    <span class="md-ellipsis">
+      SMB/CIFS forensics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SMB/CIFS forensics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyse-du-trafic-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse du trafic SMB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-evenements-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des événements SMB
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpc-et-named-pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPC et named pipes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RPC et named pipes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyse-rpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse RPC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-des-named-pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring des named pipes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-connexions-distantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des connexions distantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des connexions distantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rdp-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      RDP Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winrm-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      WinRM Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-de-mouvements-lateraux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection de mouvements latéraux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Détection de mouvements latéraux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pass-the-hash-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pass-the-Hash Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golden-ticket-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Golden Ticket Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-de-dcsync" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection de DCSync
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outils-danalyse-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils d'analyse réseau
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outils d&#39;analyse réseau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wireshark-avance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wireshark avancé
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zeek-bro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zeek (Bro)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suricata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suricata
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../malware-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Malware Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specific-artifacts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specific Artifacts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools-techniques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools & Techniques
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use Cases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci_cd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI/CD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-forensics-sur-windows-analyse-des-communications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Forensics sur Windows - Analyse des communications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Forensics sur Windows - Analyse des communications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vue-densemble-de-lanalyse-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vue d'ensemble de l'analyse réseau
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue d&#39;ensemble de l&#39;analyse réseau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectifs-de-lanalyse-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectifs de l'analyse réseau
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture-de-trafic-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture de trafic réseau
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capture de trafic réseau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#outils-de-capture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils de capture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-avancee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration avancée
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-connexions-tcpudp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des connexions TCP/UDP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des connexions TCP/UDP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-flux-tcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des flux TCP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-udp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse UDP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-reseau-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs réseau Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logs réseau Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#event-logs-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Logs réseau
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sysmon-network-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sysmon Network Events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-dactivites-malveillantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection d'activités malveillantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Détection d&#39;activités malveillantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indicateurs-de-compromission-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indicateurs de compromission réseau
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-protocoles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des protocoles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analyse-des-shares-et-rpc-communication-inter-processus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des Shares et RPC - Communication inter-processus
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des Shares et RPC - Communication inter-processus">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smbcifs-forensics" class="md-nav__link">
+    <span class="md-ellipsis">
+      SMB/CIFS forensics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SMB/CIFS forensics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyse-du-trafic-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse du trafic SMB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-evenements-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des événements SMB
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpc-et-named-pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPC et named pipes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RPC et named pipes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyse-rpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse RPC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-des-named-pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring des named pipes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyse-des-connexions-distantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyse des connexions distantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analyse des connexions distantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rdp-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      RDP Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winrm-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      WinRM Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-de-mouvements-lateraux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection de mouvements latéraux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Détection de mouvements latéraux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pass-the-hash-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pass-the-Hash Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golden-ticket-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Golden Ticket Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-de-dcsync" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détection de DCSync
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outils-danalyse-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outils d'analyse réseau
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outils d&#39;analyse réseau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wireshark-avance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wireshark avancé
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zeek-bro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zeek (Bro)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suricata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suricata
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="analyse-reseau-pour-la-forensique-windows">Analyse Réseau pour la Forensique Windows<a class="headerlink" href="#analyse-reseau-pour-la-forensique-windows" title="Permanent link">&para;</a></h1>
+<h2 id="network-forensics-sur-windows-analyse-des-communications">Network Forensics sur Windows - Analyse des communications<a class="headerlink" href="#network-forensics-sur-windows-analyse-des-communications" title="Permanent link">&para;</a></h2>
+<h3 id="vue-densemble-de-lanalyse-reseau">Vue d'ensemble de l'analyse réseau<a class="headerlink" href="#vue-densemble-de-lanalyse-reseau" title="Permanent link">&para;</a></h3>
+<p>L'analyse réseau forensique consiste à capturer, analyser et interpréter le trafic réseau pour identifier des activités malveillantes, reconstituer des événements et collecter des preuves.</p>
+<h4 id="objectifs-de-lanalyse-reseau">Objectifs de l'analyse réseau<a class="headerlink" href="#objectifs-de-lanalyse-reseau" title="Permanent link">&para;</a></h4>
+<p><strong>Détection d'intrusion</strong>
+- Identification des connexions non autorisées
+- Détection d'exfiltration de données
+- Analyse des communications de malwares</p>
+<p><strong>Reconstruction d'événements</strong>
+- Chronologie des communications
+- Identification des acteurs
+- Mapping des infrastructures malveillantes</p>
+<p><strong>Collecte de preuves</strong>
+- Capture des communications
+- Extraction d'artefacts réseau
+- Documentation des activités</p>
+<h3 id="capture-de-trafic-reseau">Capture de trafic réseau<a class="headerlink" href="#capture-de-trafic-reseau" title="Permanent link">&para;</a></h3>
+<h4 id="outils-de-capture">Outils de capture<a class="headerlink" href="#outils-de-capture" title="Permanent link">&para;</a></h4>
+<p><strong>Wireshark</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Capture sur interface spécifique</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>wireshark<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-w<span class="w"> </span>capture.pcap
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Capture avec filtre</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>wireshark<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;host 192.168.1.100&quot;</span><span class="w"> </span>-w<span class="w"> </span>targeted_capture.pcap
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Capture en ligne de commande</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>tshark<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-w<span class="w"> </span>network_traffic.pcap
+</code></pre></div></p>
+<p><strong>tcpdump</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Capture basique</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-w<span class="w"> </span>network.pcap
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Capture avec filtres</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.100<span class="w"> </span>and<span class="w"> </span>port<span class="w"> </span><span class="m">80</span><span class="w"> </span>-w<span class="w"> </span>http_traffic.pcap
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Capture DNS</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>port<span class="w"> </span><span class="m">53</span><span class="w"> </span>-w<span class="w"> </span>dns_traffic.pcap
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Capture avec timestamp</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-tttt<span class="w"> </span>-w<span class="w"> </span>timestamped.pcap
+</code></pre></div></p>
+<p><strong>netsh (Windows)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># Démarrer la capture
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>netsh trace start capture=yes tracefile=network.etl provider=Microsoft-Windows-TCPIP
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a># Arrêter la capture
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>netsh trace stop
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a># Conversion en pcap
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>netsh trace convert network.etl output=network.pcap
+</code></pre></div></p>
+<h4 id="configuration-avancee">Configuration avancée<a class="headerlink" href="#configuration-avancee" title="Permanent link">&para;</a></h4>
+<p><strong>Mirrors de ports</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Configuration switch Cisco</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>interface<span class="w"> </span>GigabitEthernet0/1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w"> </span>switchport<span class="w"> </span>mode<span class="w"> </span>access
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w"> </span>switchport<span class="w"> </span>access<span class="w"> </span>vlan<span class="w"> </span><span class="m">100</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>monitor<span class="w"> </span>session<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>interface<span class="w"> </span>GigabitEthernet0/1
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>monitor<span class="w"> </span>session<span class="w"> </span><span class="m">1</span><span class="w"> </span>destination<span class="w"> </span>interface<span class="w"> </span>GigabitEthernet0/24
+</code></pre></div></p>
+<p><strong>TAP réseau</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Configuration avec ntopng</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ntopng<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-P<span class="w"> </span>/var/lib/ntopng/ntopng.pid<span class="w"> </span>-d<span class="w"> </span>/var/lib/ntopng<span class="w"> </span>-w<span class="w"> </span><span class="m">3000</span>
+</code></pre></div></p>
+<h3 id="analyse-des-connexions-tcpudp">Analyse des connexions TCP/UDP<a class="headerlink" href="#analyse-des-connexions-tcpudp" title="Permanent link">&para;</a></h3>
+<h4 id="analyse-des-flux-tcp">Analyse des flux TCP<a class="headerlink" href="#analyse-des-flux-tcp" title="Permanent link">&para;</a></h4>
+<p><strong>Reconstruction des sessions</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span> <span class="nn">pyshark</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">def</span> <span class="nf">analyze_tcp_streams</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">tcp_streams</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;tcp&#39;</span><span class="p">):</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="n">stream_id</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">stream</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="k">if</span> <span class="n">stream_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tcp_streams</span><span class="p">:</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>                <span class="n">tcp_streams</span><span class="p">[</span><span class="n">stream_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>                    <span class="s1">&#39;packets&#39;</span><span class="p">:</span> <span class="p">[],</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>                    <span class="s1">&#39;src_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>                    <span class="s1">&#39;dst_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>                    <span class="s1">&#39;src_port&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">srcport</span><span class="p">,</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>                    <span class="s1">&#39;dst_port&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">dstport</span><span class="p">,</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>                    <span class="s1">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span><span class="p">,</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>                    <span class="s1">&#39;bytes_sent&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>                    <span class="s1">&#39;bytes_received&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>                <span class="p">}</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>            <span class="n">tcp_streams</span><span class="p">[</span><span class="n">stream_id</span><span class="p">][</span><span class="s1">&#39;packets&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>            <span class="c1"># Calculer les statistiques</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;tcp&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="p">,</span> <span class="s1">&#39;len&#39;</span><span class="p">):</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>                <span class="n">tcp_streams</span><span class="p">[</span><span class="n">stream_id</span><span class="p">][</span><span class="s1">&#39;bytes_sent&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">len</span><span class="p">)</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    <span class="k">return</span> <span class="n">tcp_streams</span>
+</code></pre></div></p>
+<p><strong>Détection d'anomalies TCP</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span> <span class="nf">detect_tcp_anomalies</span><span class="p">(</span><span class="n">tcp_streams</span><span class="p">):</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">anomalies</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">for</span> <span class="n">stream_id</span><span class="p">,</span> <span class="n">stream</span> <span class="ow">in</span> <span class="n">tcp_streams</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="c1"># Connexions sur ports non standard</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;dst_port&#39;</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">443</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">143</span><span class="p">]:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>            <span class="n">anomalies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stream </span><span class="si">{</span><span class="n">stream_id</span><span class="si">}</span><span class="s2">: Non-standard port </span><span class="si">{</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;dst_port&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="c1"># Ratio de données suspect</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="k">if</span> <span class="n">stream</span><span class="p">[</span><span class="s1">&#39;bytes_sent&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10000000</span><span class="p">:</span>  <span class="c1"># 10MB</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>            <span class="n">anomalies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stream </span><span class="si">{</span><span class="n">stream_id</span><span class="si">}</span><span class="s2">: Large data transfer&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="c1"># Connexions longues</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="p">(</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;packets&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sniff_time</span> <span class="o">-</span> <span class="n">stream</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        <span class="k">if</span> <span class="n">duration</span> <span class="o">&gt;</span> <span class="mi">3600</span><span class="p">:</span>  <span class="c1"># 1 heure</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>            <span class="n">anomalies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stream </span><span class="si">{</span><span class="n">stream_id</span><span class="si">}</span><span class="s2">: Long connection (</span><span class="si">{</span><span class="n">duration</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    <span class="k">return</span> <span class="n">anomalies</span>
+</code></pre></div></p>
+<h4 id="analyse-udp">Analyse UDP<a class="headerlink" href="#analyse-udp" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse des flux UDP</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">analyze_udp_traffic</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">udp_flows</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;udp&#39;</span><span class="p">):</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>            <span class="n">flow_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">packet</span><span class="o">.</span><span class="n">udp</span><span class="o">.</span><span class="n">srcport</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">packet</span><span class="o">.</span><span class="n">udp</span><span class="o">.</span><span class="n">dstport</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>            <span class="k">if</span> <span class="n">flow_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">udp_flows</span><span class="p">:</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>                <span class="n">udp_flows</span><span class="p">[</span><span class="n">flow_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>                    <span class="s1">&#39;packets&#39;</span><span class="p">:</span> <span class="p">[],</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>                    <span class="s1">&#39;total_bytes&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>                    <span class="s1">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span><span class="p">,</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>                    <span class="s1">&#39;last_time&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>                <span class="p">}</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>            <span class="n">udp_flows</span><span class="p">[</span><span class="n">flow_key</span><span class="p">][</span><span class="s1">&#39;packets&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>            <span class="n">udp_flows</span><span class="p">[</span><span class="n">flow_key</span><span class="p">][</span><span class="s1">&#39;total_bytes&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">udp</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>            <span class="n">udp_flows</span><span class="p">[</span><span class="n">flow_key</span><span class="p">][</span><span class="s1">&#39;last_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>    <span class="k">return</span> <span class="n">udp_flows</span>
+</code></pre></div></p>
+<p><strong>Détection de tunneling DNS</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span> <span class="nf">detect_dns_tunneling</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">dns_queries</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;dns&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">packet</span><span class="o">.</span><span class="n">dns</span><span class="o">.</span><span class="n">flags_response</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>            <span class="n">query_name</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">dns</span><span class="o">.</span><span class="n">qry_name</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>            <span class="k">if</span> <span class="n">query_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dns_queries</span><span class="p">:</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>                <span class="n">dns_queries</span><span class="p">[</span><span class="n">query_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>            <span class="n">dns_queries</span><span class="p">[</span><span class="n">query_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="c1"># Détection de tunneling</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    <span class="n">suspicious_domains</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    <span class="k">for</span> <span class="n">domain</span><span class="p">,</span> <span class="n">queries</span> <span class="ow">in</span> <span class="n">dns_queries</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>  <span class="c1"># Nombreuses requêtes</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>            <span class="n">suspicious_domains</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>        <span class="c1"># Sous-domaines longs (potentiel tunneling)</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>            <span class="n">suspicious_domains</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>    <span class="k">return</span> <span class="n">suspicious_domains</span>
+</code></pre></div></p>
+<h3 id="logs-reseau-windows">Logs réseau Windows<a class="headerlink" href="#logs-reseau-windows" title="Permanent link">&para;</a></h3>
+<h4 id="event-logs-reseau">Event Logs réseau<a class="headerlink" href="#event-logs-reseau" title="Permanent link">&para;</a></h4>
+<p><strong>Security Event Log</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c"># Événements de connexion réseau</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Security&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">5156</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="nv">$data</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Source IP: </span><span class="p">$(</span><span class="nv">$data</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="s1">&#39;#text&#39;</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Source Port: </span><span class="p">$(</span><span class="nv">$data</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="s1">&#39;#text&#39;</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Destination IP: </span><span class="p">$(</span><span class="nv">$data</span><span class="p">[</span><span class="n">2</span><span class="p">].</span><span class="s1">&#39;#text&#39;</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Destination Port: </span><span class="p">$(</span><span class="nv">$data</span><span class="p">[</span><span class="n">3</span><span class="p">].</span><span class="s1">&#39;#text&#39;</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Protocol: </span><span class="p">$(</span><span class="nv">$data</span><span class="p">[</span><span class="n">4</span><span class="p">].</span><span class="s1">&#39;#text&#39;</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;---&quot;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Firewall Logs</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># Activation du logging firewall</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">netsh</span> <span class="n">advfirewall</span> <span class="nb">set </span><span class="n">allprofiles</span> <span class="n">logging</span> <span class="n">filename</span> <span class="k">%</span><span class="n">systemroot</span><span class="p">%\</span><span class="n">system32</span><span class="p">\</span><span class="n">LogFiles</span><span class="p">\</span><span class="n">Firewall</span><span class="p">\</span><span class="n">pfirewall</span><span class="p">.</span><span class="n">log</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">netsh</span> <span class="n">advfirewall</span> <span class="nb">set </span><span class="n">allprofiles</span> <span class="n">logging</span> <span class="n">maxfilesize</span> <span class="n">4096</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">netsh</span> <span class="n">advfirewall</span> <span class="nb">set </span><span class="n">allprofiles</span> <span class="n">logging</span> <span class="n">droppedconnections</span> <span class="n">enable</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">netsh</span> <span class="n">advfirewall</span> <span class="nb">set </span><span class="n">allprofiles</span> <span class="n">logging</span> <span class="n">allowedconnections</span> <span class="n">enable</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c"># Analyse des logs</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nb">Get-Content</span> <span class="n">C</span><span class="p">:\</span><span class="n">Windows</span><span class="p">\</span><span class="n">system32</span><span class="p">\</span><span class="n">LogFiles</span><span class="p">\</span><span class="n">Firewall</span><span class="p">\</span><span class="n">pfirewall</span><span class="p">.</span><span class="n">log</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-like</span> <span class="s2">&quot;*DROP*&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-First</span> <span class="n">10</span>
+</code></pre></div></p>
+<h4 id="sysmon-network-events">Sysmon Network Events<a class="headerlink" href="#sysmon-network-events" title="Permanent link">&para;</a></h4>
+<p><strong>Configuration Sysmon</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">&lt;Sysmon</span><span class="w"> </span><span class="na">schemaversion=</span><span class="s">&quot;4.30&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&lt;EventFiltering&gt;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">&lt;NetworkConnect</span><span class="w"> </span><span class="na">onmatch=</span><span class="s">&quot;include&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="nt">&lt;Image</span><span class="w"> </span><span class="na">condition=</span><span class="s">&quot;end with&quot;</span><span class="nt">&gt;</span>cmd.exe<span class="nt">&lt;/Image&gt;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">&lt;Image</span><span class="w"> </span><span class="na">condition=</span><span class="s">&quot;end with&quot;</span><span class="nt">&gt;</span>powershell.exe<span class="nt">&lt;/Image&gt;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">&lt;Image</span><span class="w"> </span><span class="na">condition=</span><span class="s">&quot;end with&quot;</span><span class="nt">&gt;</span>rundll32.exe<span class="nt">&lt;/Image&gt;</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nt">&lt;/NetworkConnect&gt;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="nt">&lt;/EventFiltering&gt;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="nt">&lt;/Sysmon&gt;</span>
+</code></pre></div></p>
+<p><strong>Analyse des événements Sysmon</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c"># Connexions réseau (Event ID 3)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-Sysmon/Operational&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">3</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="nv">$processName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;Image&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="nv">$destIP</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;DestinationIp&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="nv">$destPort</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;DestinationPort&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Process: $processName -&gt; $destIP:$destPort&quot;</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="detection-dactivites-malveillantes">Détection d'activités malveillantes<a class="headerlink" href="#detection-dactivites-malveillantes" title="Permanent link">&para;</a></h3>
+<h4 id="indicateurs-de-compromission-reseau">Indicateurs de compromission réseau<a class="headerlink" href="#indicateurs-de-compromission-reseau" title="Permanent link">&para;</a></h4>
+<p><strong>Beaconing</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span> <span class="nf">detect_beaconing</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">connections</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;ip&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;tcp&#39;</span><span class="p">):</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">dstport</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>                <span class="n">connections</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>            <span class="n">connections</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span><span class="p">)</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>    <span class="c1"># Analyser les intervalles</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="n">beacons</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="k">for</span> <span class="n">conn</span><span class="p">,</span> <span class="n">timestamps</span> <span class="ow">in</span> <span class="n">connections</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>            <span class="n">intervals</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)):</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>                <span class="n">interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">timestamps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">timestamps</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>                <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>            <span class="c1"># Vérifier la régularité</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>                <span class="n">avg_interval</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>                <span class="n">variance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">avg_interval</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>                <span class="k">if</span> <span class="n">variance</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Faible variance = beaconing</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>                    <span class="n">beacons</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>                        <span class="s1">&#39;connection&#39;</span><span class="p">:</span> <span class="n">conn</span><span class="p">,</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>                        <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="n">avg_interval</span><span class="p">,</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>                        <span class="s1">&#39;variance&#39;</span><span class="p">:</span> <span class="n">variance</span><span class="p">,</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>                        <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>                    <span class="p">})</span>
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>    <span class="k">return</span> <span class="n">beacons</span>
+</code></pre></div></p>
+<p><strong>Exfiltration de données</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span> <span class="nf">detect_data_exfiltration</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">external_transfers</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;ip&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;tcp&#39;</span><span class="p">):</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>            <span class="n">src_ip</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>            <span class="n">dst_ip</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>            <span class="c1"># Vérifier si destination externe</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">dst_ip</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;192.168.&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dst_ip</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;10.&#39;</span><span class="p">):</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>                <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">src_ip</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="n">dst_ip</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">external_transfers</span><span class="p">:</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>                    <span class="n">external_transfers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;tcp&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="p">,</span> <span class="s1">&#39;len&#39;</span><span class="p">):</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>                    <span class="n">external_transfers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">len</span><span class="p">)</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>    <span class="c1"># Identifier les transferts suspects</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>    <span class="n">suspicious_transfers</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>    <span class="k">for</span> <span class="n">transfer</span><span class="p">,</span> <span class="n">bytes_sent</span> <span class="ow">in</span> <span class="n">external_transfers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>        <span class="k">if</span> <span class="n">bytes_sent</span> <span class="o">&gt;</span> <span class="mi">10000000</span><span class="p">:</span>  <span class="c1"># 10MB</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>            <span class="n">suspicious_transfers</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>                <span class="s1">&#39;transfer&#39;</span><span class="p">:</span> <span class="n">transfer</span><span class="p">,</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>                <span class="s1">&#39;bytes&#39;</span><span class="p">:</span> <span class="n">bytes_sent</span><span class="p">,</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>                <span class="s1">&#39;mb&#39;</span><span class="p">:</span> <span class="n">bytes_sent</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>            <span class="p">})</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>    <span class="k">return</span> <span class="n">suspicious_transfers</span>
+</code></pre></div></p>
+<h4 id="analyse-des-protocoles">Analyse des protocoles<a class="headerlink" href="#analyse-des-protocoles" title="Permanent link">&para;</a></h4>
+<p><strong>HTTP Analysis</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span> <span class="nf">analyze_http_traffic</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">http_requests</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;http&#39;</span><span class="p">):</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="p">,</span> <span class="s1">&#39;request_method&#39;</span><span class="p">):</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>                <span class="n">request</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>                    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span><span class="p">,</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>                    <span class="s1">&#39;src_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span><span class="p">,</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>                    <span class="s1">&#39;dst_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>                    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">request_method</span><span class="p">,</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>                    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">host</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">,</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>                    <span class="s1">&#39;uri&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">request_uri</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="p">,</span> <span class="s1">&#39;request_uri&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">,</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>                    <span class="s1">&#39;user_agent&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">user_agent</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">http</span><span class="p">,</span> <span class="s1">&#39;user_agent&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>                <span class="p">}</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>                <span class="n">http_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>    <span class="k">return</span> <span class="n">http_requests</span>
+</code></pre></div></p>
+<p><strong>HTTPS Analysis</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span> <span class="nf">analyze_tls_traffic</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="n">tls_sessions</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;tls&#39;</span><span class="p">):</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">tls</span><span class="p">,</span> <span class="s1">&#39;handshake_extensions_server_name&#39;</span><span class="p">):</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>                <span class="n">session</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>                    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span><span class="p">,</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>                    <span class="s1">&#39;src_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span><span class="p">,</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>                    <span class="s1">&#39;dst_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>                    <span class="s1">&#39;server_name&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">tls</span><span class="o">.</span><span class="n">handshake_extensions_server_name</span><span class="p">,</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>                    <span class="s1">&#39;cipher_suite&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">tls</span><span class="o">.</span><span class="n">handshake_ciphersuite</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">tls</span><span class="p">,</span> <span class="s1">&#39;handshake_ciphersuite&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>                <span class="p">}</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>                <span class="n">tls_sessions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>    <span class="k">return</span> <span class="n">tls_sessions</span>
+</code></pre></div></p>
+<h2 id="analyse-des-shares-et-rpc-communication-inter-processus">Analyse des Shares et RPC - Communication inter-processus<a class="headerlink" href="#analyse-des-shares-et-rpc-communication-inter-processus" title="Permanent link">&para;</a></h2>
+<h3 id="smbcifs-forensics">SMB/CIFS forensics<a class="headerlink" href="#smbcifs-forensics" title="Permanent link">&para;</a></h3>
+<h4 id="analyse-du-trafic-smb">Analyse du trafic SMB<a class="headerlink" href="#analyse-du-trafic-smb" title="Permanent link">&para;</a></h4>
+<p><strong>Capture SMB</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Capture du trafic SMB</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>tshark<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;port 445 or port 139&quot;</span><span class="w"> </span>-w<span class="w"> </span>smb_traffic.pcap
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Analyse avec Wireshark</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>wireshark<span class="w"> </span>-r<span class="w"> </span>smb_traffic.pcap<span class="w"> </span>-Y<span class="w"> </span><span class="s2">&quot;smb2&quot;</span>
+</code></pre></div></p>
+<p><strong>Extraction des fichiers SMB</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span> <span class="nn">pyshark</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">def</span> <span class="nf">extract_smb_files</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="n">smb_files</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;smb2&#39;</span><span class="p">):</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">):</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>                <span class="n">file_info</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>                    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span><span class="p">,</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>                    <span class="s1">&#39;src_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span><span class="p">,</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>                    <span class="s1">&#39;dst_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>                    <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>                    <span class="s1">&#39;share&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="o">.</span><span class="n">tree</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="p">,</span> <span class="s1">&#39;tree&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>                    <span class="s1">&#39;command&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="o">.</span><span class="n">cmd</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>                <span class="p">}</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>                <span class="n">smb_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_info</span><span class="p">)</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>    <span class="k">return</span> <span class="n">smb_files</span>
+</code></pre></div></p>
+<h4 id="analyse-des-evenements-smb">Analyse des événements SMB<a class="headerlink" href="#analyse-des-evenements-smb" title="Permanent link">&para;</a></h4>
+<p><strong>Audit SMB</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c"># Activation de l&#39;audit SMB</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">auditpol</span> <span class="p">/</span><span class="nb">set </span><span class="p">/</span><span class="n">subcategory</span><span class="p">:</span><span class="s2">&quot;File Share&quot;</span> <span class="p">/</span><span class="n">success</span><span class="p">:</span><span class="n">enable</span> <span class="p">/</span><span class="n">failure</span><span class="p">:</span><span class="n">enable</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">auditpol</span> <span class="p">/</span><span class="nb">set </span><span class="p">/</span><span class="n">subcategory</span><span class="p">:</span><span class="s2">&quot;Detailed File Share&quot;</span> <span class="p">/</span><span class="n">success</span><span class="p">:</span><span class="n">enable</span> <span class="p">/</span><span class="n">failure</span><span class="p">:</span><span class="n">enable</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="c"># Analyse des événements</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Security&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">5140</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    <span class="nv">$subject</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;SubjectUserName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    <span class="nv">$shareName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ShareName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    <span class="nv">$sourceIP</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;IpAddress&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;User: $subject accessed share: $shareName from IP: $sourceIP&quot;</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="rpc-et-named-pipes">RPC et named pipes<a class="headerlink" href="#rpc-et-named-pipes" title="Permanent link">&para;</a></h3>
+<h4 id="analyse-rpc">Analyse RPC<a class="headerlink" href="#analyse-rpc" title="Permanent link">&para;</a></h4>
+<p><strong>Capture RPC</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Capture du trafic RPC</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>tshark<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;port 135&quot;</span><span class="w"> </span>-w<span class="w"> </span>rpc_traffic.pcap
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># Analyse avec Wireshark</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>wireshark<span class="w"> </span>-r<span class="w"> </span>rpc_traffic.pcap<span class="w"> </span>-Y<span class="w"> </span><span class="s2">&quot;dcerpc&quot;</span>
+</code></pre></div></p>
+<p><strong>Analyse des named pipes</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span> <span class="nf">analyze_named_pipes</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">):</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="n">cap</span> <span class="o">=</span> <span class="n">pyshark</span><span class="o">.</span><span class="n">FileCapture</span><span class="p">(</span><span class="n">pcap_file</span><span class="p">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="n">named_pipes</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">cap</span><span class="p">:</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="s1">&#39;smb2&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">):</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>            <span class="n">filename</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="o">.</span><span class="n">filename</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>            <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\\\</span><span class="s1">&#39;</span><span class="p">):</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>                <span class="n">pipe_info</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>                    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">sniff_time</span><span class="p">,</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>                    <span class="s1">&#39;src_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">src</span><span class="p">,</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>                    <span class="s1">&#39;dst_ip&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>                    <span class="s1">&#39;pipe_name&#39;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>                    <span class="s1">&#39;operation&#39;</span><span class="p">:</span> <span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="o">.</span><span class="n">cmd</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">smb2</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>                <span class="p">}</span>
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>                <span class="n">named_pipes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pipe_info</span><span class="p">)</span>
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a>    <span class="k">return</span> <span class="n">named_pipes</span>
+</code></pre></div></p>
+<h4 id="monitoring-des-named-pipes">Monitoring des named pipes<a class="headerlink" href="#monitoring-des-named-pipes" title="Permanent link">&para;</a></h4>
+<p><strong>PowerShell monitoring</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c"># Monitoring des named pipes avec Sysmon</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-Sysmon/Operational&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">17</span><span class="p">,</span><span class="n">18</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    <span class="nv">$processName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;Image&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="nv">$pipeName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;PipeName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    <span class="nv">$eventType</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Id</span> <span class="o">-eq</span> <span class="n">17</span><span class="p">)</span> <span class="p">{</span> <span class="s2">&quot;Created&quot;</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="s2">&quot;Connected&quot;</span> <span class="p">}</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Process: $processName $eventType pipe: $pipeName&quot;</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="analyse-des-connexions-distantes">Analyse des connexions distantes<a class="headerlink" href="#analyse-des-connexions-distantes" title="Permanent link">&para;</a></h3>
+<h4 id="rdp-analysis">RDP Analysis<a class="headerlink" href="#rdp-analysis" title="Permanent link">&para;</a></h4>
+<p><strong>Capture RDP</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Capture du trafic RDP</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>tshark<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;port 3389&quot;</span><span class="w"> </span>-w<span class="w"> </span>rdp_traffic.pcap
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># Analyse des connexions</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>tshark<span class="w"> </span>-r<span class="w"> </span>rdp_traffic.pcap<span class="w"> </span>-Y<span class="w"> </span><span class="s2">&quot;rdp&quot;</span>
+</code></pre></div></p>
+<p><strong>Analyse des logs RDP</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c"># Événements de connexion RDP</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-TerminalServices-LocalSessionManager/Operational&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">21</span><span class="p">,</span><span class="n">22</span><span class="p">,</span><span class="n">25</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>    <span class="nv">$user</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;User&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="nv">$sourceIP</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;Address&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>    <span class="nv">$sessionID</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;SessionID&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>    <span class="nv">$eventType</span> <span class="p">=</span> <span class="k">switch</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Id</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>        <span class="n">21</span> <span class="p">{</span> <span class="s2">&quot;Logon Success&quot;</span> <span class="p">}</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>        <span class="n">22</span> <span class="p">{</span> <span class="s2">&quot;Shell Start&quot;</span> <span class="p">}</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>        <span class="n">25</span> <span class="p">{</span> <span class="s2">&quot;Reconnection&quot;</span> <span class="p">}</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>    <span class="p">}</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;$eventType - User: $user from IP: $sourceIP (Session: $sessionID)&quot;</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="winrm-analysis">WinRM Analysis<a class="headerlink" href="#winrm-analysis" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse WinRM</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c"># Événements WinRM</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-WinRM/Operational&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">LevelDisplayName</span> <span class="o">-eq</span> <span class="s2">&quot;Information&quot;</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Time: </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">TimeCreated</span><span class="p">)</span><span class="s2"> - Message: </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="p">}</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="c"># Analyse des connexions PowerShell remotes</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Microsoft-Windows-PowerShell/Operational&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">4103</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;PowerShell Remote Command: </span><span class="p">$(</span><span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="s1">&#39;#text&#39;</span><span class="p">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="detection-de-mouvements-lateraux">Détection de mouvements latéraux<a class="headerlink" href="#detection-de-mouvements-lateraux" title="Permanent link">&para;</a></h3>
+<h4 id="pass-the-hash-detection">Pass-the-Hash Detection<a class="headerlink" href="#pass-the-hash-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse des événements d'authentification</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c"># Détection de Pass-the-Hash via Event ID 4624</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Security&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">4624</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>    <span class="nv">$logonType</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;LogonType&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>    <span class="nv">$authPackage</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;AuthenticationPackageName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>    <span class="nv">$targetUser</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;TargetUserName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>    <span class="nv">$sourceIP</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;IpAddress&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>    <span class="c"># Logon type 3 (Network) avec NTLM peut indiquer Pass-the-Hash</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$logonType</span> <span class="o">-eq</span> <span class="s2">&quot;3&quot;</span> <span class="o">-and</span> <span class="nv">$authPackage</span> <span class="o">-eq</span> <span class="s2">&quot;NTLM&quot;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>        <span class="nb">Write-Host</span> <span class="s2">&quot;Potential Pass-the-Hash: User $targetUser from IP $sourceIP&quot;</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>    <span class="p">}</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="golden-ticket-detection">Golden Ticket Detection<a class="headerlink" href="#golden-ticket-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse Kerberos</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c"># Détection de Golden Ticket via Event ID 4769</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Security&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">4769</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>    <span class="nv">$ticketOptions</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;TicketOptions&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>    <span class="nv">$encryptionType</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;TicketEncryptionType&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>    <span class="nv">$accountName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;TargetUserName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>    <span class="c"># Ticket options 0x40810000 peut indiquer Golden Ticket</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ticketOptions</span> <span class="o">-eq</span> <span class="s2">&quot;0x40810000&quot;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>        <span class="nb">Write-Host</span> <span class="s2">&quot;Potential Golden Ticket: Account $accountName with encryption $encryptionType&quot;</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>    <span class="p">}</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="detection-de-dcsync">Détection de DCSync<a class="headerlink" href="#detection-de-dcsync" title="Permanent link">&para;</a></h4>
+<p><strong>Analyse des réplications AD</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c"># Détection de DCSync via Event ID 4662</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nb">Get-WinEvent</span> <span class="n">-FilterHashtable</span> <span class="p">@{</span><span class="n">LogName</span><span class="p">=</span><span class="s2">&quot;Security&quot;</span><span class="p">;</span> <span class="n">ID</span><span class="p">=</span><span class="n">4662</span><span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>    <span class="nv">$event</span> <span class="p">=</span> <span class="no">[xml]</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToXml</span><span class="p">()</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="nv">$eventData</span> <span class="p">=</span> <span class="nv">$event</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">EventData</span><span class="p">.</span><span class="n">Data</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>    <span class="nv">$objectName</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;ObjectName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>    <span class="nv">$accessMask</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;AccessMask&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>    <span class="nv">$subjectUser</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$eventData</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;SubjectUserName&quot;</span><span class="p">}).</span><span class="s1">&#39;#text&#39;</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>    <span class="c"># Access mask 0x100 (DS-Replication-Get-Changes) peut indiquer DCSync</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$accessMask</span> <span class="o">-eq</span> <span class="s2">&quot;0x100&quot;</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>        <span class="nb">Write-Host</span> <span class="s2">&quot;Potential DCSync: User $subjectUser accessing $objectName&quot;</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>    <span class="p">}</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="p">}</span>
+</code></pre></div></p>
+<h2 id="outils-danalyse-reseau">Outils d'analyse réseau<a class="headerlink" href="#outils-danalyse-reseau" title="Permanent link">&para;</a></h2>
+<h3 id="wireshark-avance">Wireshark avancé<a class="headerlink" href="#wireshark-avance" title="Permanent link">&para;</a></h3>
+<p><strong>Filtres utiles</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a># Trafic suspect
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>tcp.flags.syn==1 and tcp.flags.ack==0 and tcp.window_size &lt;= 1024
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a># Connexions longues
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>tcp.time_delta &gt; 300
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a># Transferts de données importants
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>tcp.len &gt; 1000
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a># Trafic non standard
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a>not (tcp.port == 80 or tcp.port == 443 or tcp.port == 53 or tcp.port == 22)
+</code></pre></div></p>
+<h3 id="zeek-bro">Zeek (Bro)<a class="headerlink" href="#zeek-bro" title="Permanent link">&para;</a></h3>
+<p><strong>Configuration Zeek</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c"># local.zeek</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="cp">@load base/frameworks/notice</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="cp">@load base/protocols/conn</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="cp">@load base/protocols/http</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="cp">@load base/protocols/dns</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="cp">@load base/protocols/ssl</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="c"># Détection de beaconing</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="kt">event</span><span class="w"> </span><span class="nf">connection_established</span><span class="p">(</span><span class="n">c</span><span class="p">:</span><span class="w"> </span><span class="n">connection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">$</span><span class="n">duration</span><span class="p">;</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">$</span><span class="n">orig_bytes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="o">$</span><span class="n">resp_bytes</span><span class="p">;</span>
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">duration</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">300.0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="nf">fmt</span><span class="p">(</span><span class="s">&quot;Potential beaconing: </span><span class="se">%s</span><span class="s"> -&gt; </span><span class="se">%s</span><span class="s">:</span><span class="se">%s</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="o">$</span><span class="n">id</span><span class="o">$</span><span class="n">orig_h</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="o">$</span><span class="n">id</span><span class="o">$</span><span class="n">resp_h</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="o">$</span><span class="n">id</span><span class="o">$</span><span class="n">resp_p</span><span class="p">);</span>
+<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="suricata">Suricata<a class="headerlink" href="#suricata" title="Permanent link">&para;</a></h3>
+<p><strong>Configuration Suricata</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># suricata.yaml</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nt">rule-files</span><span class="p">:</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">suricata.rules</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emerging-threats.rules</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="nt">outputs</span><span class="p">:</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">eve-log</span><span class="p">:</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">      </span><span class="nt">filetype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regular</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">      </span><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eve.json</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">      </span><span class="nt">types</span><span class="p">:</span>
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alert</span>
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dns</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tls</span>
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">files</span>
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smtp</span>
+</code></pre></div></p>
+<p>Cette approche méthodique permet une analyse réseau complète pour la détection d'activités malveillantes et la reconstruction d'événements forensiques.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
