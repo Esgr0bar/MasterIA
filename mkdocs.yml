@@ -42,10 +42,13 @@ nav:
   - Notebooks: notebooks.md
   - Inference: inference.md
   - API Reference: api_reference.md
+  - Performance: performance.md
+  - FAQ: faq.md
   - Troubleshooting: troubleshooting.md
   - Contributing: contributing.md
   - CI/CD: ci_cd.md
   - Changelog: changelog.md
+  - Content Roadmap: content_roadmap.md
 
 markdown_extensions:
   - toc:
