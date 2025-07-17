@@ -1,24 +1,65 @@
 site_name: AI-Based Audio Mixing and Mastering
 theme:
   name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 plugins:
   - search
   - mkdocstrings:
+      default_handler: python
       handlers:
         python:
-          setup_commands:
-            - import sys; sys.path.insert(0, 'src')
+          paths: [src]
+          options:
+            show_source: false
+            show_root_heading: true
+            show_root_toc_entry: true
+            docstring_style: google
 
 nav:
   - Home: index.md
-  - Project Overview: index.md
+  - Usage Guide: usage.md
   - Data Handling: data.md
   - Notebooks: notebooks.md
-  - API Reference:
-      - Data Processing: reference/data_processing.md
-      - Feature Extraction: reference/feature_extraction.md
-      - Model Training: reference/model_training.md
-  - Contribution Guidelines: contributing.md
-  - Continuous Integration: ci_cd.md
+  - Inference: inference.md
+  - API Reference: api_reference.md
+  - Troubleshooting: troubleshooting.md
+  - Contributing: contributing.md
+  - CI/CD: ci_cd.md
   - Changelog: changelog.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.mark
+  - pymdownx.caret
+  - pymdownx.tilde
+  - pymdownx.keys
